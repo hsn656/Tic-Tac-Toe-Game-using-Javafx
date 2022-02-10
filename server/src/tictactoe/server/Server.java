@@ -6,6 +6,8 @@
 package tictactoe.server;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -21,6 +23,7 @@ import java.util.TreeSet;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import tictactoe.server.db.DatabaseManager;
+import tictactoe.server.models.Game;
 import tictactoe.server.models.Player;
 
 /**
@@ -70,6 +73,22 @@ public class Server extends Thread {
         }
     }
     
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Socket socket = serverSocket.accept();
+                ClientThread clientThread = new ClientThread(new User(socket));
+                clientThread.start();
+                clientThreads.add(clientThread);
+            } catch (IOException ex) {
+                app.guiLog("issue has been fitched with server socket.");
+            }
+        }
+    }
+
+    
+    
     public void turnOff() {
         for (ClientThread clientThread : clientThreads) {
             clientThread.closeClient();
@@ -107,6 +126,11 @@ public class Server extends Thread {
     
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
+    }
+    
+    public void addNewOfflinePlayer(Player player) {
+        offlinePlayers.put(player.getId(), new User(player));
+        sortedOfflinePlayersbyPoints.add(player);
     }
         
     public class User {
@@ -177,6 +201,42 @@ public class Server extends Thread {
             }
         }
         
+         @Override
+        public void run() {
+            app.guiLog("server is listening");
+            try {
+                while (true) {
+                    String line = dataInputStream.readUTF();
+                    if (line != null) {
+                        JsonObject request = JsonParser.parseString(line).getAsJsonObject();
+                        app.guiLog("Incoming JSON:\t" + line);
+                        if (request.get("type").getAsString().equals("signout")) {
+
+                            app.guiLog("user" + user.toString() + " player:" + user.player + " logging off");
+
+                            handleClosedPlayer();
+                            break;
+                        } else {
+                            jsonHandler.handle(request, user);
+                        }
+                    }
+                }
+            } catch (IOException ex) {
+                app.guiLog("NO DATA.");
+                handleClosedPlayer();
+            }
+        }
+
+        private void handleClosedPlayer() {
+            if (user.player != null) {
+                if (user.player.getCurrentGame() != null) {
+                    handleTerminatedGame(user);
+                }
+                removeFromOnlinePlayers(user.player.getId()); // call here
+            }
+            setPlayerList();
+        }
+        
         public void closeClient() {
             try {
                 app.guiLog("one of the users has logged off");
@@ -192,5 +252,64 @@ public class Server extends Thread {
 
         
     }
+    
+    public void handleTerminatedGame(User user) {
+        System.out.print("handleTerminatedGame function is not implemented yet");
+    }
+    
+    public void removeFromOnlinePlayers(int id) {
+        User user = onlinePlayers.remove(id);
+        user.socket = null;
+        offlinePlayers.put(id, user);
+        sortedOnlinePlayersbyPoints.remove(user.player);
+        sortedOfflinePlayersbyPoints.add(user.player);
+        user.player.setOnline(false);
+        sendUpdatedPlayerList();
+        setChatPlayerStatus("offline", user.getPlayer().getFirstName());
+    }
+    public void sendUpdatedPlayerList() {
+        setPlayerList();
+        /* update server gui player list */
+        JsonObject data = new JsonObject();
+        JsonObject response = new JsonObject();
+        response.addProperty("type", "update-player-list");
+        response.add("data", data);
+        JsonArray onlineUsers = getSortedOnlinePlayersAsJson();
+        JsonArray offlineUsers = getSortedOfflinePlayersAsJson();
+        data.add("online-players", onlineUsers);
+        data.add("offline-players", offlineUsers);
+        sendToAllOnlinePlayers(response);
+    }
+    
+    
+    public void sendToAllOnlinePlayers(JsonObject req) {
+        onlinePlayers.forEach((key, value) -> {
+            try {
+                app.guiLog("k:" + key + " v:" + value);
+                value.dataOutputStream.writeUTF(req.toString());
+            } catch (Exception ex) {
+                app.guiLog("Issue fitched with writing into the output stream");
+            }
+        });
+    }
+
+    public void setChatPlayerStatus(String status, String playerName) {
+        // [player is now online.]
+        // [player is now offline.]
+        JsonObject request = new JsonObject();
+        JsonObject data = new JsonObject();
+        request.add("data", data);
+        request.addProperty("type", "global_chat_message");
+        data.addProperty("sender", "");
+
+        if (status.equals("offline")) {
+            data.addProperty("message", "[" + playerName + " is now offline.]");
+        } else if (status.equals("online")) {
+            data.addProperty("message", "[" + playerName + " is now online.]");
+        }
+
+        sendToAllOnlinePlayers(request);
+    }
+
     
 }

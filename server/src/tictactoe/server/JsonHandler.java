@@ -5,7 +5,11 @@
  */
 package tictactoe.server;
 
+import com.google.gson.JsonObject;
+import java.sql.SQLException;
+import tictactoe.server.Server.User;
 import tictactoe.server.db.DatabaseManager;
+import tictactoe.server.models.Player;
 
 /**
  *
@@ -23,4 +27,53 @@ public class JsonHandler {
             ex.printStackTrace();
         }
     }
+    
+    void handle(JsonObject request, User user) {
+        String requestType = request.get("type").getAsString();
+
+        JsonObject requestData = request.getAsJsonObject("data");
+        JsonObject response = null;
+        switch (requestType) {
+            case "signup":
+                response = handleSignup(requestData, user);
+                break;
+        }
+    }
+    
+    private JsonObject handleSignup(JsonObject requestData, User user) {
+        JsonObject response = new JsonObject();
+        JsonObject data = new JsonObject();
+        response.add("data", data);
+
+        String firstName = requestData.get("firstName").getAsString();
+        String lastName = requestData.get("lastName").getAsString();
+        String email = requestData.get("email").getAsString();
+        String password = requestData.get("password").getAsString();
+        {
+            try {
+                Player player = null;
+                try {
+                    player = databaseManager.signUp(firstName, lastName, email, password);
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                if (player != null) {
+                    response.addProperty("type", "signup-success");
+                    server.addNewOfflinePlayer(player);
+                    server.setPlayerList();
+                } else {
+                    response.addProperty("type", "signup-error");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+        return response;
+    }
+
+    
+    
+    
+    
 }

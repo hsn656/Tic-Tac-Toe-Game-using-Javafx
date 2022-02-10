@@ -107,8 +107,8 @@ public class ServerMain extends Application {
         launch(args);
     }
 
-    public void guiLog(String turning_on_the_server) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void guiLog(String text) {
+        textArea.appendText(text + '\n');
     }
     
     public void setPlayersListCounter(int playersListCounter) {

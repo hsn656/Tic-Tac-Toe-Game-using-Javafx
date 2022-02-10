@@ -8,6 +8,7 @@ package tictactoe.server.db;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -68,6 +69,80 @@ public class DatabaseManager {
         connection.close();
         
         return allPlayers;
+    }
+    
+     public Player signUp(String first_name, String last_name, String email, String password) throws SQLException, ClassNotFoundException {
+        Player newPlayer = null;
+        
+        if (isEmailExists(email)) {
+            System.out.println("Your email is already registered..");
+        } else {
+            establishConnection();
+            
+            PreparedStatement preparedStatment = connection.prepareStatement("INSERT INTO player (first_name, last_name, email, password) VALUES (?, ?, ?, ?);");
+            preparedStatment.setString(1, first_name);
+            preparedStatment.setString(2, last_name);
+            preparedStatment.setString(3, email);
+            preparedStatment.setString(4, password);
+            preparedStatment.executeUpdate();
+            
+            newPlayer = getLastPlayer();
+            
+            preparedStatment.close();
+            connection.close();
+        }
+        return newPlayer;
+    }
+    
+    public boolean isEmailExists(String email) throws SQLException {
+        
+        try {
+            establishConnection();
+            statment = connection.createStatement();
+            resultSet = statment.executeQuery("SELECT email FROM player WHERE email='" + email + "';");
+
+            // The email is in the DB.
+            if (resultSet.first() == true) {
+                statment.close();
+                connection.close();
+                return true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        statment.close();
+        connection.close();
+        return false;
+    }
+
+    public Player getLastPlayer() {
+        Player lastPlayer = new Player();
+        
+        try {
+            establishConnection();
+            statment = connection.createStatement();
+            resultSet = statment.executeQuery("SELECT * FROM player ORDER BY id DESC LIMIT 0, 1");
+            
+            if (resultSet.first()) {
+                int newUserId = Integer.parseInt(resultSet.getString("id"));
+                lastPlayer.setId(newUserId);
+                lastPlayer.setFirstName(resultSet.getString("first_name"));
+                lastPlayer.setLastName(resultSet.getString("last_name"));
+                lastPlayer.setPoints(0);
+                lastPlayer.setEmail(resultSet.getString("email"));
+                lastPlayer.setCurrentGame(null);
+            } else {
+                lastPlayer = null;
+                throw new SQLException("Getting the last user failed");
+            }
+            
+            statment.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return lastPlayer;
     }
 
 
