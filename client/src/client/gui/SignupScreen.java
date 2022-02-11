@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -51,7 +52,6 @@ public class SignupScreen extends StackPane{
         name.setPromptText("Please Enter your Name");
         name.setFocusTraversable(false);
         name.setId("name");
-        name.setPrefWidth(300);
         nickName = new TextField();
         nickName.setPromptText("Please Enter your Nickname");
         nickName.setId("name");
@@ -129,8 +129,6 @@ public class SignupScreen extends StackPane{
         });
 
         Region rec = new Region();
-        rec.prefHeight(600);
-        rec.prefWidth(450);
         rec.setId("recSignin");
         Label alreadyRegistered = new Label("Already Registered?");
         alreadyRegistered.setId("alreadyRegisteredLabel");
@@ -142,12 +140,14 @@ public class SignupScreen extends StackPane{
         });
         alreadyRegistered.setCursor(Cursor.HAND);
         VBox box1 = new VBox(18, repassword, signup);
+        box1.setAlignment(Pos.CENTER);
         box1.setStyle("-fx-border-width: 0px;");
         VBox box = new VBox(14, label1, name, nickName, email, password, box1, alreadyRegistered, error);
         box.setStyle("-fx-border-width: 0px;");
         box.setId("vbox");
         box1.setId("vbox");
         setId("stackSignin");
+        box.setAlignment(Pos.CENTER);
         getChildren().addAll(rec, box);
 
     }
@@ -169,17 +169,14 @@ public class SignupScreen extends StackPane{
         if (nickName.getText().isEmpty()) {
             nickName.setPromptText("You Cannot Leave Name Empty");
             nickName.setStyle("-fx-font-size: 16px; -fx-alignment: CENTER");
-            nickName.setPrefSize(324, 45);
         }
         if (name.getText().isEmpty()) {
             name.setPromptText("You Cannot Leave Name Empty");
             name.setStyle("-fx-font-size: 16px; -fx-alignment: CENTER");
-            name.setPrefSize(324, 45);
         }
         if (email.getText().isEmpty()) {
             email.setPromptText("You Cannot Leave E-Mail Empty");
             email.setStyle("-fx-font-size: 16px; -fx-alignment: CENTER");
-            email.setPrefSize(324, 45);
         }
         if (!email.getText().matches(regex) && !email.getText().isEmpty()) {
             error("Email Must be something@somthing.somthing", email);
@@ -187,7 +184,6 @@ public class SignupScreen extends StackPane{
         if (password.getText().isEmpty()) {
             password.setPromptText("You Cannot Leave Password Empty");
             password.setStyle("-fx-font-size: 16px;");
-            password.setPrefSize(324, 45);
             showSignupButton();
         }
         if (!password.getText().equals(repassword.getText())) {
@@ -198,7 +194,6 @@ public class SignupScreen extends StackPane{
         if (repassword.getText().isEmpty()) {
             repassword.setPromptText("You Must Retype Your Password");
             repassword.setStyle("-fx-font-size: 16px;");
-            repassword.setPrefSize(324, 45);
         }
         if (password.getText().equals(repassword.getText()) && !nickName.getText().isEmpty()
                 && !name.getText().isEmpty() && !email.getText().isEmpty() && !password.getText().isEmpty()

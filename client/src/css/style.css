@@ -1,0 +1,42 @@
+/*================signup screen==============*/
+#signup {
+  -fx-background-color: #d07576;
+  -fx-text-fill: white;
+  -fx-border-radius: 55px;
+  -fx-border-radius: 45px;
+  -fx-background-radius: 55px;
+   -fx-font-size: 18pt;
+}
+
+#signup:hover {
+    -fx-background-color: #000000;
+  -fx-border-size: 10px;
+  -fx-border-color: #000000;  
+}
+
+#name
+{
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+    -fx-min-width: 600;
+    -fx-max-width: 600;
+    -fx-min-height: 60;
+    -fx-alignment: center;
+    -fx-font-family: 'walter turncoat';
+    -fx-font-size: 15pt;
+}
+
+#recSignin
+{
+    -fx-background-color: rgb(110, 197, 193);
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+     -fx-alignment: center;
+}
+
+#alreadyRegisteredLabel {
+  -fx-font-family: "Walter Turncoat";
+  -fx-font-size: 18pt;
+  -fx-text-fill: white;
+}
+
