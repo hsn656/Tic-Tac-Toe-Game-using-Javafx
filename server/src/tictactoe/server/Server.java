@@ -256,6 +256,21 @@ public class Server extends Thread {
     public void handleTerminatedGame(User user) {
         System.out.print("handleTerminatedGame function is not implemented yet");
     }
+    public void addToOnlinePlayers(int id, User newUser) {
+        User user = offlinePlayers.remove(id);
+        newUser.player.setOnline(true);
+        onlinePlayers.put(id, newUser);
+        sortedOfflinePlayersbyPoints.remove(user.player);
+        sortedOnlinePlayersbyPoints.add(newUser.player);
+        newUser.player.setOnline(true);
+        sendUpdatedPlayerList();
+        app.guiLog("New player has been added to the online players list");
+        setChatPlayerStatus("online", user.getPlayer().getFirstName());
+    }
+   public User getOnlinePlayerById(int id) {
+        return onlinePlayers.get(id);
+    }
+
     
     public void removeFromOnlinePlayers(int id) {
         User user = onlinePlayers.remove(id);

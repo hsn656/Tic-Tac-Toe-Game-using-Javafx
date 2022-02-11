@@ -6,6 +6,7 @@
 package tictactoe.server;
 
 import com.google.gson.JsonObject;
+import java.io.IOException;
 import java.sql.SQLException;
 import tictactoe.server.Server.User;
 import tictactoe.server.db.DatabaseManager;
@@ -36,6 +37,9 @@ public class JsonHandler {
         switch (requestType) {
             case "signup":
                 response = handleSignup(requestData, user);
+                break;
+            case "signin":
+                response = handleSignin(requestData, user);
                 break;
         }
     }
@@ -71,7 +75,46 @@ public class JsonHandler {
         }
         return response;
     }
+    private JsonObject handleSignin(JsonObject requestData, User user) {
+        JsonObject response = new JsonObject();
+        JsonObject data = new JsonObject();
+        response.add("data", data);
 
+        String email = requestData.get("email").getAsString();
+        String password = requestData.get("password").getAsString();
+        Player player = databaseManager.signIn(email, password);
+        if (player == null) {
+            response.addProperty("type", "signin-error");
+            data.addProperty("msg", "wrong email or password");
+            try {
+                user.getDataOutputStream().writeUTF(response.toString());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            if (server.getOnlinePlayerById(player.getId()) != null) {
+                response.addProperty("type", "signin-error");
+                data.addProperty("msg", "You are logged in from another device");
+                try {
+                    user.getDataOutputStream().writeUTF(response.toString());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                return null;
+            }
+            user.setPlayer(player);
+            response.addProperty("type", "signin-success");
+            data.add("my-data", player.asJson());
+            try {
+                user.getDataOutputStream().writeUTF(response.toString());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            server.addToOnlinePlayers(player.getId(), user);
+            server.setPlayerList();
+        }
+        return null;
+    }
     
     
     

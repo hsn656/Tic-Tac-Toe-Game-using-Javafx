@@ -5,6 +5,7 @@
  */
 package client;
 
+import client.gui.SigninScreen;
 import client.gui.SignupScreen;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -88,13 +89,16 @@ public class App extends Application {
     }
 
     
+ 
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
         pStage = primaryStage;
 //        primaryStage.setFullScreen(true);
         primaryStage.setTitle("TIC TAC TOE!");
 
-        mainScene = new Scene(screens.get("signup"), 1350, 700);
+//        mainScene = new Scene(screens.get("signup"), 1350, 700);
+        mainScene = new Scene(screens.get("signin"), 1350, 700);
+
         mainScene.getStylesheets().add(getClass().getResource("/css/style.css").toString());
         primaryStage.setScene(mainScene);
         primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -122,8 +126,17 @@ public class App extends Application {
         });
     }
 
-    
-    
+
+   public Pane getScreen(String screen) {
+        return screens.get(screen);
+    }
+        public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+        System.out.println("current player" + this.currentPlayer);
+    }
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
 
     /**
      * @param args the command line arguments
@@ -134,6 +147,9 @@ public class App extends Application {
 
     private void addScreens() {
                 screens.put("signup", new SignupScreen(this));
+                screens.put("signin", new SigninScreen(this));
+//                screens.put("signin", new SigninScreen());
+
     }
 
     public void showAlert(String title, String msg) {
@@ -149,11 +165,7 @@ public class App extends Application {
         });
         
     }
-    
-    public Pane getScreen(String screen) {
-        return screens.get(screen);
-    }
-    
+
     public void setScreen(String screenName) {
         Platform.runLater(new Runnable() {
             @Override

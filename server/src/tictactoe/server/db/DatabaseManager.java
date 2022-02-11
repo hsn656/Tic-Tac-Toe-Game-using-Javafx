@@ -93,6 +93,42 @@ public class DatabaseManager {
         }
         return newPlayer;
     }
+// sign in by kelany------
+    public Player signIn(String email, String password) {
+        Player playerSignIn = null;
+        if (email != null && password != null) {
+            try {
+                establishConnection();
+                statment = connection.createStatement();
+                resultSet = statment.executeQuery("SELECT * FROM player WHERE email='" + email + "' AND password='" + password + "';");
+                
+                if (resultSet.first() == true) {
+                    System.out.println("Login successed..");
+                    playerSignIn = new Player();
+                    playerSignIn.setId(resultSet.getInt("id"));
+                    playerSignIn.setFirstName(resultSet.getString("first_name"));
+                    playerSignIn.setLastName(resultSet.getString("last_name"));
+                    playerSignIn.setEmail(resultSet.getString("email"));
+                    playerSignIn.setImg(resultSet.getString("image"));
+                    playerSignIn.setPoints(resultSet.getInt("points"));
+                    statment.close();
+                    connection.close();
+                    return playerSignIn;
+                } else {
+                    statment.close();
+                    connection.close();
+                    System.out.println("Login failed.");
+                    return playerSignIn;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("Empty fields..");
+            return playerSignIn;
+        }
+        return playerSignIn;
+    }
     
     public boolean isEmailExists(String email) throws SQLException {
         
