@@ -186,7 +186,7 @@ public class MainScreen extends Pane {
                 continue;
             }
             Player player = new Player();
-            player.setLastName(jsonPlayer.get("lastName").getAsString());
+            player.setFirstName(jsonPlayer.get("firstName").getAsString());
             player.setPoints(jsonPlayer.get("points").getAsInt());
             player.setId(jsonPlayer.get("id").getAsInt());
             ToggleButton invite2 = new ToggleButton("Challenge");
@@ -204,7 +204,7 @@ public class MainScreen extends Pane {
 
             Label score2 = new Label(Integer.toString(player.getPoints()));
             score2.setId("scoreLabel");
-            Label playerName = new Label(player.getLastName());
+            Label playerName = new Label(player.getFirstName());
             playerName.setPrefWidth(100);
             Circle cir2 = new Circle(150.0f, 150.0f, 5.f);
             cir2.setFill(color);

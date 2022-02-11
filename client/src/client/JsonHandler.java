@@ -6,10 +6,14 @@
 package client;
 
 import client.gui.MainScreen;
+import client.gui.PlayerListScreen;
 import client.gui.SigninScreen;
 import client.gui.SignupScreen;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.DataInputStream;
+import javafx.application.Platform;
+import javafx.scene.paint.Color;
 //import Player.java;
 
 /**
@@ -22,6 +26,7 @@ class JsonHandler {
     SignupScreen signupScreen;
     SigninScreen signinScreen;
     MainScreen mainScreen;
+    PlayerListScreen playerList;
 
 
     JsonHandler(App a) {
@@ -70,7 +75,27 @@ class JsonHandler {
                 app.showAlert("Could not login", requestData.get("msg").getAsString());
                 signinScreen.showSigninButton();
                 break;
+            case "update-player-list":
+                refreshList(requestData);
+                break;
         }
     }
     
+        public void refreshList(JsonObject requestData) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                mainScreen.clearPlayersListPane();
+                JsonArray onlinePlayerList = requestData.getAsJsonArray("online-players");
+                JsonArray offlinePlayerList = requestData.getAsJsonArray("offline-players");
+                mainScreen.setPlayersListCounter(0);
+                mainScreen.addPlayersToList(onlinePlayerList, "online", Color.GREEN);
+                mainScreen.addPlayersToList(offlinePlayerList, "offline", Color.RED);
+                playerList.setPlayersListCounter(0);
+                playerList.addPlayersToList(onlinePlayerList, "online", Color.GREEN);
+                playerList.addPlayersToList(offlinePlayerList, "offline", Color.RED);
+            }
+        });
+    }
+
 }

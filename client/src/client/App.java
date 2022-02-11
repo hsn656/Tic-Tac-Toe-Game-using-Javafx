@@ -181,6 +181,20 @@ public class App extends Application {
         return dataOutputStream;
     }
     
+    public void sendInvitation(int playerId) {
+        JsonObject request = new JsonObject();
+        JsonObject data = new JsonObject();
+        request.add("data", data);
+        request.addProperty("type", "invitation");
+        data.addProperty("invited_player_id", playerId);
+        try {
+            System.out.println("SENT JSON INVITATION: " + request);
+            getDataOutputStream().writeUTF(request.toString());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     private void makePaneDraggable(Stage primaryStage) {
         screens.forEach((key, value) -> {
             value.setOnMousePressed(new EventHandler<MouseEvent>() {

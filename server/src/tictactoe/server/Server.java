@@ -259,6 +259,7 @@ public class Server extends Thread {
     public void addToOnlinePlayers(int id, User newUser) {
         User user = offlinePlayers.remove(id);
         newUser.player.setOnline(true);
+        System.out.println("updated");
         onlinePlayers.put(id, newUser);
         sortedOfflinePlayersbyPoints.remove(user.player);
         sortedOnlinePlayersbyPoints.add(newUser.player);
