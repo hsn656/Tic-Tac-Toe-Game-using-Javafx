@@ -10,3 +10,13 @@ CREATE TABLE IF NOT EXISTS `player` (
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `game` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `player1_id` int DEFAULT NULL,
+  `player2_id` int DEFAULT NULL,
+  `session_status` enum('inProgress','terminated','finished') DEFAULT NULL,
+  `coordinates` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
