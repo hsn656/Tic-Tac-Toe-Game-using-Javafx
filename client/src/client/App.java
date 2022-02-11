@@ -5,7 +5,9 @@
  */
 package client;
 
+import client.gui.InvitationScreen;
 import client.gui.MainScreen;
+import client.gui.MultiOnlinePlayers;
 import client.gui.SigninScreen;
 import client.gui.SignupScreen;
 import com.google.gson.JsonObject;
@@ -147,10 +149,13 @@ public class App extends Application {
     }
 
     private void addScreens() {
-                screens.put("signup", new SignupScreen(this));
-                screens.put("signin", new SigninScreen(this));
-                screens.put("main", new MainScreen(this));
-//                screens.put("signin", new SigninScreen());
+        screens.put("signup", new SignupScreen(this));
+        screens.put("signin", new SigninScreen(this));
+        screens.put("main", new MainScreen(this));
+        screens.put("invitation", new InvitationScreen(this));
+        screens.put("multiOnlinePlayers", new MultiOnlinePlayers(this));
+        
+//                
 
     }
 

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import tictactoe.server.Server.User;
 import tictactoe.server.db.DatabaseManager;
+import tictactoe.server.models.Game;
 import tictactoe.server.models.Player;
 
 /**
@@ -41,8 +42,19 @@ public class JsonHandler {
             case "signin":
                 response = handleSignin(requestData, user);
                 break;
+            case "invitation":
+                response = handleInvitation(requestData, user);
+                break;
+            case "accept-invitation":
+                response = handleInvitationAccept(requestData, user);
+                break;
+            case "decline-invitation":
+                //{"type": "decline-invitation", "data":{"inviting_player_id": 123}}
+                break;
         }
     }
+
+
     
     private JsonObject handleSignup(JsonObject requestData, User user) {
         JsonObject response = new JsonObject();
@@ -116,7 +128,85 @@ public class JsonHandler {
         return null;
     }
     
-    
+    private JsonObject handleInvitation(JsonObject requestData, User user) {
+        User opponentUser = server.getOnlinePlayerById(requestData.get("invited_player_id").getAsInt());
+        if (opponentUser == null) {
+            return null;
+        }
+        if (opponentUser.getPlayer().isOnline() && opponentUser.getPlayer().getCurrentGame() == null) {
+            JsonObject response = new JsonObject();
+            JsonObject data = new JsonObject();
+            response.add("data", data);
+            response.addProperty("type", "invitation");
+
+            data.addProperty("inviter_player_id", user.getPlayer().getId());
+            data.addProperty("inviter_player_name", user.getPlayer().getFirstName());
+            try {
+                opponentUser.getDataOutputStream().writeUTF(response.toString());
+            } catch (IOException iOException) {
+                iOException.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    private JsonObject handleInvitationAccept(JsonObject requestData, User user) {
+        User invitingPlayer = server.getOnlinePlayerById(requestData.get("inviting_player_id").getAsInt());
+
+        if (invitingPlayer.getPlayer().isOnline() && invitingPlayer.getPlayer().getCurrentGame() == null) {
+            JsonObject response = new JsonObject();
+            JsonObject data = new JsonObject();
+            response.add("data", data);
+            response.addProperty("type", "invitation-accepted");
+
+            data.addProperty("invited_player_id", user.getPlayer().getId());
+            data.addProperty("invited_player_name", user.getPlayer().getFirstName());
+
+            try {
+                invitingPlayer.getDataOutputStream().writeUTF(response.toString());
+            } catch (IOException iOException) {
+                iOException.printStackTrace();
+            }
+
+            Game game = null;
+            try {
+                game = databaseManager.getTerminatedGame(
+                        user.getPlayer().getId(), invitingPlayer.getPlayer().getId());
+                if (game == null) {
+                    game = databaseManager.getTerminatedGame(invitingPlayer.getPlayer().getId(),
+                            user.getPlayer().getId());
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            if (game == null) {
+                game = new Game(invitingPlayer.getPlayer(), user.getPlayer());
+            } else {
+                game.setGameStatus(Game.Status.inProgress);
+                game.setPlayerX(server.getOnlinePlayerById(game.getPlayerXId()).getPlayer());
+                game.setPlayerO(server.getOnlinePlayerById(game.getPlayerOId()).getPlayer());
+                JsonObject terminatedGameResponse = new JsonObject();
+                terminatedGameResponse.addProperty("type", "terminated-game-data");
+
+                JsonObject terminatedGameData = new JsonObject();
+                terminatedGameResponse.add("data", terminatedGameData);
+                terminatedGameData.add("game-coordinates", game.getGameCoordinates());
+                terminatedGameData.addProperty("playerX_id", game.getPlayerXId());
+                terminatedGameData.addProperty("playerO_id", game.getPlayerOId());
+                try {
+                    user.getDataOutputStream().writeUTF(terminatedGameResponse.toString());
+                    invitingPlayer.getDataOutputStream().writeUTF(terminatedGameResponse.toString());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            invitingPlayer.getPlayer().setCurrentGame(game);
+            user.getPlayer().setCurrentGame(game);
+        }
+        return null;
+    }
+
+
     
     
 }

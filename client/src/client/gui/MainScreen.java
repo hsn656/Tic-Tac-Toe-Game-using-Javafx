@@ -198,7 +198,7 @@ public class MainScreen extends Pane {
             invite2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-//                    app.sendInvitation(player.getId());
+                    app.sendInvitation(player.getId());
                 }
             });
 

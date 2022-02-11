@@ -5,7 +5,9 @@
  */
 package client;
 
+import client.gui.InvitationScreen;
 import client.gui.MainScreen;
+import client.gui.MultiOnlinePlayers;
 import client.gui.PlayerListScreen;
 import client.gui.SigninScreen;
 import client.gui.SignupScreen;
@@ -25,8 +27,10 @@ class JsonHandler {
     private DataInputStream dataInputStream;
     SignupScreen signupScreen;
     SigninScreen signinScreen;
+    InvitationScreen invitationScreen;
     MainScreen mainScreen;
     PlayerListScreen playerList;
+    MultiOnlinePlayers multiOnlinePlayers;
 
 
     JsonHandler(App a) {
@@ -34,7 +38,8 @@ class JsonHandler {
         signupScreen = (SignupScreen) app.getScreen("signup");    
         signinScreen = (SigninScreen) a.getScreen("signin");
         mainScreen = (MainScreen) app.getScreen("main");
-
+        invitationScreen = (InvitationScreen) app.getScreen("invitation");
+        multiOnlinePlayers = (MultiOnlinePlayers) app.getScreen("multiOnlinePlayers");
 
 }
     
@@ -61,15 +66,11 @@ class JsonHandler {
                         myData.get("email").getAsString(),
                         myData.get("points").getAsInt()
                 ));
-
                 mainScreen.setWelcomePlayer(app.getCurrentPlayer().getFirstName(), app.getCurrentPlayer().getPoints());
-//
 //                playWithComputerEasy.setPlayerName(app.getCurrentPlayer().getLastName());
 //                playWithComputerNormal.setPlayerName(app.getCurrentPlayer().getLastName());
 //                playWithComputerHard.setPlayerName(app.getCurrentPlayer().getLastName());
-
                 app.setScreen("main");
-         
                 break;
             case "signin-error":
                 app.showAlert("Could not login", requestData.get("msg").getAsString());
@@ -77,6 +78,17 @@ class JsonHandler {
                 break;
             case "update-player-list":
                 refreshList(requestData);
+                break;
+            case "invitation":
+                int challengerId = requestData.get("inviter_player_id").getAsInt();
+                String challengerName = requestData.get("inviter_player_name").getAsString();
+                invitationScreen.setInvitation(challengerId, challengerName);
+                break;
+            case "invitation-accepted":
+                /*inviter side*/
+                int opposingPlayerId = requestData.get("invited_player_id").getAsInt();
+                String opposingPlayerName = requestData.get("invited_player_name").getAsString();
+                multiOnlinePlayers.invitationAcceptedSetInviterSide(opposingPlayerName, opposingPlayerId);
                 break;
         }
     }
@@ -91,9 +103,9 @@ class JsonHandler {
                 mainScreen.setPlayersListCounter(0);
                 mainScreen.addPlayersToList(onlinePlayerList, "online", Color.GREEN);
                 mainScreen.addPlayersToList(offlinePlayerList, "offline", Color.RED);
-                playerList.setPlayersListCounter(0);
-                playerList.addPlayersToList(onlinePlayerList, "online", Color.GREEN);
-                playerList.addPlayersToList(offlinePlayerList, "offline", Color.RED);
+//                playerList.setPlayersListCounter(0);
+//                playerList.addPlayersToList(onlinePlayerList, "online", Color.GREEN);
+//                playerList.addPlayersToList(offlinePlayerList, "offline", Color.RED);
             }
         });
     }

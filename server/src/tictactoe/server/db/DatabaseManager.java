@@ -5,6 +5,8 @@
  */
 package tictactoe.server.db;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
+import tictactoe.server.models.Game;
+import tictactoe.server.models.Game.Status;
 import tictactoe.server.models.Player;
 
 /**
@@ -179,6 +183,34 @@ public class DatabaseManager {
         }
         
         return lastPlayer;
+    }
+
+    public Game getTerminatedGame(int firstPlayerId, int secondPlayerId) throws SQLException {
+        Game terminatedGame = null;
+        
+        try {
+            establishConnection();
+            statment = connection.createStatement();
+            resultSet = statment.executeQuery("select * from game where player1_id ='" + firstPlayerId
+                    + "' and player2_id ='" + secondPlayerId + "' and session_status='terminated';");
+            if (resultSet.last()) {
+                terminatedGame = new Game(null, null);
+                Status gameStatus = Status.valueOf(resultSet.getString("session_status"));
+                String coordinatesDB = resultSet.getString("coordinates");
+                int playerXId = resultSet.getInt("player1_id");
+                int playerYId = resultSet.getInt("player2_id");
+                int gameId = resultSet.getInt("id");
+                JsonObject request = JsonParser.parseString(coordinatesDB).getAsJsonObject();
+                terminatedGame.setGameStatus(gameStatus);
+                terminatedGame.setGameCoordinates(request);
+                terminatedGame.setPlayerXId(playerXId);
+                terminatedGame.setPlayerOId(playerYId);
+                terminatedGame.setGameId(gameId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return terminatedGame;
     }
 
 
