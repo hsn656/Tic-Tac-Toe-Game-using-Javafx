@@ -64,6 +64,7 @@ class JsonHandler {
 //                playWithComputerHard.setPlayerName(app.getCurrentPlayer().getLastName());
 
                 app.setScreen("main");
+         
                 break;
             case "signin-error":
                 app.showAlert("Could not login", requestData.get("msg").getAsString());
