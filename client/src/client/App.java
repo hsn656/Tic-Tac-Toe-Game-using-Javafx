@@ -100,7 +100,7 @@ public class App extends Application {
         primaryStage.setTitle("TIC TAC TOE!");
 
 //        mainScene = new Scene(screens.get("signup"), 1350, 700);
-        mainScene = new Scene(screens.get("signin"), 1350, 900);
+        mainScene = new Scene(screens.get("signin"), 1350, 1200);
 
         mainScene.getStylesheets().add(getClass().getResource("/css/style.css").toString());
         primaryStage.setScene(mainScene);

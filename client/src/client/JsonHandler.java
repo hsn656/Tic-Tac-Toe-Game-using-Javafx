@@ -92,6 +92,9 @@ class JsonHandler {
             case "global_chat_message":
                 mainScreen.setGlobalMsgFromServer(requestData.get("sender").getAsString(), requestData.get("message").getAsString());
                 break;
+            case "game-message":
+                multiOnlinePlayers.setNewMsg(requestData.get("msg").getAsString());
+                break;
         }
     }
 

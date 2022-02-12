@@ -56,6 +56,9 @@ public class JsonHandler {
                 server.sendToAllOnlinePlayers(request);
                 response = null;
                 break;
+            case "game-message":
+                response = handleGameMessage(request, user);
+                break;
         }
     }
 
@@ -206,6 +209,20 @@ public class JsonHandler {
             }
             invitingPlayer.getPlayer().setCurrentGame(game);
             user.getPlayer().setCurrentGame(game);
+        }
+        return null;
+    }
+    private JsonObject handleGameMessage(JsonObject request, User user) {
+        if (user.getPlayer().getCurrentGame() != null) {
+            try {
+                Game game = user.getPlayer().getCurrentGame();
+                Player opponentPlayer = game.getPlayerX().getId() == user.getPlayer().getId()
+                        ? game.getPlayerO() : game.getPlayerX();
+                server.getOnlinePlayerById(opponentPlayer.getId()).getDataOutputStream()
+                        .writeUTF(request.toString());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
         return null;
     }

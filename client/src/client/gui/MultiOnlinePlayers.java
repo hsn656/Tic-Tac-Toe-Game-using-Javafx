@@ -124,7 +124,7 @@ public class MultiOnlinePlayers extends Pane {
 
             @Override
             public void handle(ActionEvent event) {
-//                sendEvent();
+                sendEvent();
             }
 
         });
@@ -218,6 +218,28 @@ public class MultiOnlinePlayers extends Pane {
         System.out.println("turn: " + turn + "thisPlayerLetter: " + thisPlayerLetter + "opponentPlayerLetter: " + opponenetPlayerLetter);
         System.out.println("test 6");
         app.setScreen("multiOnlinePlayers");
+    }
+     private void sendEvent() {
+
+        if (chatMessageArea.getText().isEmpty()) {
+            return;
+        }
+        JsonObject response = new JsonObject();
+        JsonObject data = new JsonObject();
+        response.add("data", data);
+        response.addProperty("type", "game-message");
+        data.addProperty("msg", chatMessageArea.getText());
+        chatTextArea.setText(chatTextArea.getText()+app.getCurrentPlayer().getFirstName() 
+                + ": " + chatMessageArea.getText() + "\n");
+        chatMessageArea.setText("");
+        try {
+            app.getDataOutputStream().writeUTF(response.toString());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+     public void setNewMsg(String msg) {
+        chatTextArea.appendText(challengerName + ": " + msg+"\n"  );
     }
 
     
