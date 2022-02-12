@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
  * @author Hassan
  */
 class JsonHandler {
+
     private App app;
     private DataInputStream dataInputStream;
     SignupScreen signupScreen;
@@ -32,23 +33,21 @@ class JsonHandler {
     PlayerListScreen playerList;
     MultiOnlinePlayers multiOnlinePlayers;
 
-
     JsonHandler(App a) {
         app = a;
-        signupScreen = (SignupScreen) app.getScreen("signup");    
+        signupScreen = (SignupScreen) app.getScreen("signup");
         signinScreen = (SigninScreen) a.getScreen("signin");
         mainScreen = (MainScreen) app.getScreen("main");
         invitationScreen = (InvitationScreen) app.getScreen("invitation");
         multiOnlinePlayers = (MultiOnlinePlayers) app.getScreen("multiOnlinePlayers");
 
-}
-    
-    
+    }
+
     public void handle(JsonObject request) {
         System.out.println(request);
         String requestType = request.get("type").getAsString();
         JsonObject requestData = request.getAsJsonObject("data");
-        
+
         switch (requestType) {
             case "signup-error":
                 signupScreen.showSignupFailedPopup();
@@ -90,10 +89,13 @@ class JsonHandler {
                 String opposingPlayerName = requestData.get("invited_player_name").getAsString();
                 multiOnlinePlayers.invitationAcceptedSetInviterSide(opposingPlayerName, opposingPlayerId);
                 break;
+            case "global_chat_message":
+                mainScreen.setGlobalMsgFromServer(requestData.get("sender").getAsString(), requestData.get("message").getAsString());
+                break;
         }
     }
-    
-        public void refreshList(JsonObject requestData) {
+
+    public void refreshList(JsonObject requestData) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

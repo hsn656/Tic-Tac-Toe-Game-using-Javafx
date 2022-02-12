@@ -1,8 +1,3 @@
-CREATE USER 'abdallah'@127.0.0.1 IDENTIFIED BY 'root';
-
-GRANT ALL PRIVILEGES ON * . * TO 'abdallah'@127.0.0.1;
-
-
 CREATE DATABASE IF NOT EXISTS `user_base` ;
 
 CREATE TABLE IF NOT EXISTS `player` (

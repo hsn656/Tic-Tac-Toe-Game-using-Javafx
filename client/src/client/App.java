@@ -96,15 +96,15 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
         pStage = primaryStage;
-//        primaryStage.setFullScreen(true);
+       primaryStage.setFullScreen(true);
         primaryStage.setTitle("TIC TAC TOE!");
 
 //        mainScene = new Scene(screens.get("signup"), 1350, 700);
-        mainScene = new Scene(screens.get("signin"), 1350, 700);
+        mainScene = new Scene(screens.get("signin"), 1350, 900);
 
         mainScene.getStylesheets().add(getClass().getResource("/css/style.css").toString());
         primaryStage.setScene(mainScene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+       // primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
         mainScene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {

@@ -18,6 +18,7 @@ import tictactoe.server.models.Player;
  * @author Hassan
  */
 public class JsonHandler {
+
     private DatabaseManager databaseManager;
     private final Server server;
 
@@ -29,7 +30,7 @@ public class JsonHandler {
             ex.printStackTrace();
         }
     }
-    
+
     void handle(JsonObject request, User user) {
         String requestType = request.get("type").getAsString();
 
@@ -51,11 +52,13 @@ public class JsonHandler {
             case "decline-invitation":
                 //{"type": "decline-invitation", "data":{"inviting_player_id": 123}}
                 break;
+            case "global_chat_message":
+                server.sendToAllOnlinePlayers(request);
+                response = null;
+                break;
         }
     }
 
-
-    
     private JsonObject handleSignup(JsonObject requestData, User user) {
         JsonObject response = new JsonObject();
         JsonObject data = new JsonObject();
@@ -87,6 +90,7 @@ public class JsonHandler {
         }
         return response;
     }
+
     private JsonObject handleSignin(JsonObject requestData, User user) {
         JsonObject response = new JsonObject();
         JsonObject data = new JsonObject();
@@ -127,7 +131,7 @@ public class JsonHandler {
         }
         return null;
     }
-    
+
     private JsonObject handleInvitation(JsonObject requestData, User user) {
         User opponentUser = server.getOnlinePlayerById(requestData.get("invited_player_id").getAsInt());
         if (opponentUser == null) {
@@ -206,7 +210,4 @@ public class JsonHandler {
         return null;
     }
 
-
-    
-    
 }
