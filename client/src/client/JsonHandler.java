@@ -47,7 +47,7 @@ class JsonHandler {
         System.out.println(request);
         String requestType = request.get("type").getAsString();
         JsonObject requestData = request.getAsJsonObject("data");
-
+        System.out.println("hello hassan before switch case");
         switch (requestType) {
             case "signup-error":
                 signupScreen.showSignupFailedPopup();
@@ -95,6 +95,10 @@ class JsonHandler {
             case "game-message":
                 multiOnlinePlayers.setNewMsg(requestData.get("msg").getAsString());
                 break;
+            case "game-move":
+            	System.out.println("hello hassan from switch case");
+                multiOnlinePlayers.setOpponentMoveFromServer(requestData.get("position").getAsString());
+                break;
         }
     }
 
@@ -114,5 +118,7 @@ class JsonHandler {
             }
         });
     }
+    
+    
 
 }

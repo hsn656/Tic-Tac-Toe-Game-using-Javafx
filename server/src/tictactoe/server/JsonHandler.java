@@ -59,6 +59,9 @@ public class JsonHandler {
             case "game-message":
                 response = handleGameMessage(request, user);
                 break;
+            case "game-move":
+                response = handleGameMove(request, user);
+                break;
         }
     }
 
@@ -221,6 +224,36 @@ public class JsonHandler {
                 server.getOnlinePlayerById(opponentPlayer.getId()).getDataOutputStream()
                         .writeUTF(request.toString());
             } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+    
+    private JsonObject handleGameMove(JsonObject request, User user) {
+        JsonObject reqData = request.get("data").getAsJsonObject();
+
+        if (user.getPlayer().getCurrentGame() != null) {
+            Game game = user.getPlayer().getCurrentGame();
+            Game.Position position = Game.Position.valueOf(reqData.get("position").getAsString());
+            Game.Move move = Game.Move.valueOf(reqData.get("move").getAsString());
+
+            Player opponentPlayer = move.equals(Game.Move.X) ? game.getPlayerO() : game.getPlayerX();
+            game.setNextMove(position, move);
+
+            JsonObject response = new JsonObject();
+            JsonObject data = new JsonObject();
+            response.add("data", data);
+            response.addProperty("type", "game-move");
+            data.addProperty("position", position.toString());
+            data.addProperty("move", move.toString());
+            System.out.println("TEST BEFORE HANDLE MOVE TRY");
+            try {
+                System.out.println("TEST AFTER HANDLE MOVE TRY");
+                server.getOnlinePlayerById(opponentPlayer.getId()).getDataOutputStream().writeUTF(response.toString());
+                System.out.println("SERVERSIDE opponentPlayer: " + opponentPlayer);
+                /*getDataOutputStream().writeUTF(response.toString()); */
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }

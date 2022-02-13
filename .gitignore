@@ -25,3 +25,9 @@ client/nb-configuration.xml
 
 # Class Files #
 *.class
+
+# eclipse IDE #
+*.classpath
+*.project
+client/bin/
+server/bin/

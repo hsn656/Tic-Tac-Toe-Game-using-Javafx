@@ -53,7 +53,7 @@ public class MultiOnlinePlayers extends Pane {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 int x = i * 3 + j;
-                stack.add(l.get(x), j, i);
+                stack.add(l.get(x), j, i*3);
             }
         }
 
@@ -63,7 +63,7 @@ public class MultiOnlinePlayers extends Pane {
         stack.setId("stack");
         stack.setPadding(new Insets(40, 0, 0, 50));
         stack.setHgap(150);
-        stack.setVgap(-20);
+        stack.setVgap(50);
         stack.setPrefSize(750, 700);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -81,8 +81,8 @@ public class MultiOnlinePlayers extends Pane {
                             turn = false;
                             counter++;
                             stack.requestLayout();
-//                            sendMoveToServer(x);
-//                            checkWinner();
+                            sendMoveToServer(x);
+                            checkWinner();
                         }
                     }
                 });
@@ -241,6 +241,184 @@ public class MultiOnlinePlayers extends Pane {
      public void setNewMsg(String msg) {
         chatTextArea.appendText(challengerName + ": " + msg+"\n"  );
     }
+     
+     
+     private void sendMoveToServer(int position) {
+         String moveToServer = null;
+         JsonObject request = new JsonObject();
+         JsonObject data = new JsonObject();
+         request.add("data", data);
+         request.addProperty("type", "game-move");
+         switch (position) {
+             case 0:
+                 moveToServer = "upper_left";
+                 break;
+             case 1:
+                 moveToServer = "up";
+                 break;
+             case 2:
+                 moveToServer = "upper_right";
+                 break;
+             case 3:
+                 moveToServer = "left";
+                 break;
+             case 4:
+                 moveToServer = "center";
+                 break;
+             case 5:
+                 moveToServer = "right";
+                 break;
+             case 6:
+                 moveToServer = "lower_left";
+                 break;
+             case 7:
+                 moveToServer = "down";
+                 break;
+             case 8:
+                 moveToServer = "lower_right";
+                 break;
+         }
+         data.addProperty("move", thisPlayerLetter);
+         data.addProperty("position", moveToServer);
+         try {
+             System.out.println(request);
+             app.getDataOutputStream().writeUTF(request.toString());
+         } catch (IOException ex) {
+             ex.printStackTrace();
+         }
+     }
+     
+     public void setOpponentMoveFromServer(String position) {
+         Platform.runLater(new Runnable() {
+             @Override
+             public void run() {
+                 int moveFromServer = getGamePositionAsIndex(position);
+
+                 if (turn == false) {
+                     counter++;
+                     l.get(moveFromServer).setText(opponenetPlayerLetter);
+                     l.get(moveFromServer).setId(opponenetPlayerLetter);
+                     checkWinner();
+                     turn = true;
+                     //stack.requestLayout();
+                     System.out.println("hello hassan inside if");
+                 }
+                 System.out.println("hello hassan outside if");
+             }
+         });
+
+     }
+     
+     private int getGamePositionAsIndex(String position) {
+         int index = 0;
+         switch (position) {
+             case "upper_left":
+                 index = 0;
+                 break;
+             case "up":
+                 index = 1;
+                 break;
+             case "upper_right":
+                 index = 2;
+                 break;
+             case "left":
+                 index = 3;
+                 break;
+             case "center":
+                 index = 4;
+                 break;
+             case "right":
+                 index = 5;
+                 break;
+             case "lower_left":
+                 index = 6;
+                 break;
+             case "down":
+                 index = 7;
+                 break;
+             case "lower_right":
+                 index = 8;
+                 break;
+         }
+         return index;
+     }
+     
+     private void checkWinner() {
+         for (int x = 0; x < 8; x++) {
+             line = null;
+             switch (x) {
+                 case 0:
+                     line = l.get(0).getText() + l.get(1).getText() + l.get(2).getText();
+
+                     break;
+                 case 1:
+                     line = l.get(3).getText() + l.get(4).getText() + l.get(5).getText();
+                     break;
+                 case 2:
+                     line = l.get(6).getText() + l.get(7).getText() + l.get(8).getText();
+                     break;
+                 case 3:
+
+                     line = l.get(0).getText() + l.get(3).getText() + l.get(6).getText();
+                     break;
+                 case 4:
+                     line = l.get(1).getText() + l.get(4).getText() + l.get(7).getText();
+                     break;
+                 case 5:
+                     line = l.get(2).getText() + l.get(5).getText() + l.get(8).getText();
+                     break;
+                 case 6:
+                     line = l.get(0).getText() + l.get(4).getText() + l.get(8).getText();
+                     break;
+                 case 7:
+                     line = l.get(2).getText() + l.get(4).getText() + l.get(6).getText();
+                     break;
+             }
+             if (line.equals("XXX") || line.equals("OOO")) {
+                 isEnded = true;
+                 if (line.contains(thisPlayerLetter)) {
+                     app.setScreen("youWin");
+                     JsonObject request = new JsonObject();
+                     JsonObject data = new JsonObject();
+                     request.addProperty("type", "multiplayer-game-end");
+                     request.add("data", data);
+                     data.addProperty("winner-id", app.getCurrentPlayer().getId());
+                     try {
+                         app.getDataOutputStream().writeUTF(request.toString());
+                     } catch (IOException ex) {
+                         ex.printStackTrace();
+                     }
+                 } else {
+                   app.setScreen("hardLuck");
+                 }
+
+                 counter = 0;
+                // resetGame();
+                 return;
+             }
+             if (counter == 9) {
+                 /*in case of draw*/
+                 PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                 pause.setOnFinished((ActionEvent event) -> {
+                     app.setScreen("youWin");
+                     JsonObject request = new JsonObject();
+                     JsonObject data = new JsonObject();
+                     request.addProperty("type", "multiplayer-game-end");
+                     request.add("data", data);
+                     data.addProperty("winner-id", "-1");
+                     try {
+                         app.getDataOutputStream().writeUTF(request.toString());
+                     } catch (IOException ex) {
+                         ex.printStackTrace();
+                     }
+                    app.setScreen("nooneIsTheWinner");
+                     counter = 0;
+                     // resetGame();
+                 });
+                 pause.play();
+             }
+         }
+     }
 
     
 }
