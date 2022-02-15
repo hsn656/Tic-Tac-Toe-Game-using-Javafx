@@ -40,3 +40,28 @@
   -fx-text-fill: white;
 }
 
+#welcome{
+    -fx-font-family: Bodoni;
+    -fx-text-fill: linear-gradient(#1370d6 0%, #c94343 70%);
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;    
+}
+
+#MainScreenPane{
+    -fx-background-color: pink;
+}
+
+
+#tictactoe{
+    -fx-font-family: Bodoni;
+    -fx-font-size: 51px;
+    -fx-text-fill: linear-gradient(#1370d6 0%, #c94343 70%);
+    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+}
+
+#main_button{
+    -fx-font-size: 24;
+}
+
+/*      abd@gmail.com           */
