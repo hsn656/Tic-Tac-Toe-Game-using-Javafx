@@ -17,6 +17,8 @@ import java.io.DataInputStream;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import client.gui.PlayWithComputerEasyGameBoardScreen;
+import client.gui.PlayWithComputerHARDGameBoardScreen;
+import client.gui.PlayWithComputerNormalGameBoardScreen;
 
 //import Player.java;
 
@@ -35,6 +37,9 @@ class JsonHandler {
     PlayerListScreen playerList;
     MultiOnlinePlayers multiOnlinePlayers;
     PlayWithComputerEasyGameBoardScreen playWithComputerEasy;
+     PlayWithComputerHARDGameBoardScreen playWithComputerHard;
+    PlayWithComputerNormalGameBoardScreen playWithComputerNormal;
+    
     
 
     JsonHandler(App a) {
@@ -45,6 +50,9 @@ class JsonHandler {
         invitationScreen = (InvitationScreen) app.getScreen("invitation");
         multiOnlinePlayers = (MultiOnlinePlayers) app.getScreen("multiOnlinePlayers");
         playWithComputerEasy = (PlayWithComputerEasyGameBoardScreen) app.getScreen("playWithComputerEasyGameBoard");
+        playWithComputerNormal = (PlayWithComputerNormalGameBoardScreen) app.getScreen("playWithComputerNormalGameBoard");
+        playWithComputerHard = (PlayWithComputerHARDGameBoardScreen) app.getScreen("playWithComputerHARDGameBoard");
+
         
     }
 
@@ -72,6 +80,9 @@ class JsonHandler {
                 ));
                 mainScreen.setWelcomePlayer(app.getCurrentPlayer().getFirstName(), app.getCurrentPlayer().getPoints());
                 playWithComputerEasy.setPlayerName(app.getCurrentPlayer().getLastName());
+                playWithComputerNormal.setPlayerName(app.getCurrentPlayer().getLastName());
+                playWithComputerHard.setPlayerName(app.getCurrentPlayer().getLastName());
+
                app.setScreen("main");
                 break;
             case "signin-error":

@@ -5,11 +5,15 @@
  */
 package client;
 
+import client.gui.HardLuckScreen;
 import client.gui.InvitationScreen;
 import client.gui.LevelsScreen;
 import client.gui.MainScreen;
 import client.gui.MultiOnlinePlayers;
+import client.gui.NooneIsTheWinnerScreen;
 import client.gui.PlayWithComputerEasyGameBoardScreen;
+import client.gui.PlayWithComputerHARDGameBoardScreen;
+import client.gui.PlayWithComputerNormalGameBoardScreen;
 
 import client.gui.SigninScreen;
 import client.gui.SignupScreen;
@@ -158,8 +162,12 @@ public class App extends Application {
         screens.put("invitation", new InvitationScreen(this));
         screens.put("multiOnlinePlayers", new MultiOnlinePlayers(this));
         screens.put("playWithComputerEasyGameBoard", new PlayWithComputerEasyGameBoardScreen(this));
+         screens.put("playWithComputerNormalGameBoard", new PlayWithComputerNormalGameBoardScreen(this));
+        screens.put("playWithComputerHARDGameBoard", new PlayWithComputerHARDGameBoardScreen(this));
+        screens.put("hardLuck", new HardLuckScreen(this));
+        screens.put("nooneIsTheWinner", new NooneIsTheWinnerScreen(this));
 
-//                
+                
     }
 
     public void showAlert(String title, String msg) {
