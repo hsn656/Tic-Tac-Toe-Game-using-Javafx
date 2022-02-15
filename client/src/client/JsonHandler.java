@@ -16,6 +16,8 @@ import com.google.gson.JsonObject;
 import java.io.DataInputStream;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
+import client.gui.PlayWithComputerEasyGameBoardScreen;
+
 //import Player.java;
 
 /**
@@ -32,6 +34,8 @@ class JsonHandler {
     MainScreen mainScreen;
     PlayerListScreen playerList;
     MultiOnlinePlayers multiOnlinePlayers;
+    PlayWithComputerEasyGameBoardScreen playWithComputerEasy;
+    
 
     JsonHandler(App a) {
         app = a;
@@ -40,7 +44,8 @@ class JsonHandler {
         mainScreen = (MainScreen) app.getScreen("main");
         invitationScreen = (InvitationScreen) app.getScreen("invitation");
         multiOnlinePlayers = (MultiOnlinePlayers) app.getScreen("multiOnlinePlayers");
-
+        playWithComputerEasy = (PlayWithComputerEasyGameBoardScreen) app.getScreen("playWithComputerEasyGameBoard");
+        
     }
 
     public void handle(JsonObject request) {
@@ -66,10 +71,8 @@ class JsonHandler {
                         myData.get("points").getAsInt()
                 ));
                 mainScreen.setWelcomePlayer(app.getCurrentPlayer().getFirstName(), app.getCurrentPlayer().getPoints());
-//                playWithComputerEasy.setPlayerName(app.getCurrentPlayer().getLastName());
-//                playWithComputerNormal.setPlayerName(app.getCurrentPlayer().getLastName());
-//                playWithComputerHard.setPlayerName(app.getCurrentPlayer().getLastName());
-                app.setScreen("main");
+                playWithComputerEasy.setPlayerName(app.getCurrentPlayer().getLastName());
+               app.setScreen("main");
                 break;
             case "signin-error":
                 app.showAlert("Could not login", requestData.get("msg").getAsString());
@@ -96,7 +99,7 @@ class JsonHandler {
                 multiOnlinePlayers.setNewMsg(requestData.get("msg").getAsString());
                 break;
             case "game-move":
-            	System.out.println("hello hassan from switch case");
+                System.out.println("hello hassan from switch case");
                 multiOnlinePlayers.setOpponentMoveFromServer(requestData.get("position").getAsString());
                 break;
         }
@@ -118,7 +121,5 @@ class JsonHandler {
             }
         });
     }
-    
-    
 
 }

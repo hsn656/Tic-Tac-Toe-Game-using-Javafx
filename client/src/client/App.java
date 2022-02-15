@@ -6,10 +6,14 @@
 package client;
 
 import client.gui.InvitationScreen;
+import client.gui.LevelsScreen;
 import client.gui.MainScreen;
 import client.gui.MultiOnlinePlayers;
+import client.gui.PlayWithComputerEasyGameBoardScreen;
+
 import client.gui.SigninScreen;
 import client.gui.SignupScreen;
+import client.gui.YouWinScreen;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.DataInputStream;
@@ -37,8 +41,7 @@ import javafx.stage.WindowEvent;
  * @author Hassan
  */
 public class App extends Application {
-    
-    
+
     private HashMap<String, Pane> screens = new HashMap<>();
     private Scene mainScene;
     private Socket s;
@@ -53,8 +56,7 @@ public class App extends Application {
     public static int opposingPlayerId = -1;
     public static String opposingPlayerName = "";
 
-    
-     public App() {
+    public App() {
 
         addScreens();
         jsonHandler = new JsonHandler(this);
@@ -91,12 +93,10 @@ public class App extends Application {
         }).start();
     }
 
-    
- 
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
         pStage = primaryStage;
-       primaryStage.setFullScreen(true);
+        primaryStage.setFullScreen(true);
         primaryStage.setTitle("TIC TAC TOE!");
 
 //        mainScene = new Scene(screens.get("signup"), 1350, 700);
@@ -104,7 +104,7 @@ public class App extends Application {
 
         mainScene.getStylesheets().add(getClass().getResource("/css/style.css").toString());
         primaryStage.setScene(mainScene);
-       // primaryStage.initStyle(StageStyle.UNDECORATED);
+        // primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
         mainScene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
@@ -129,14 +129,15 @@ public class App extends Application {
         });
     }
 
-
-   public Pane getScreen(String screen) {
+    public Pane getScreen(String screen) {
         return screens.get(screen);
     }
-        public void setCurrentPlayer(Player currentPlayer) {
+
+    public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
         System.out.println("current player" + this.currentPlayer);
     }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -152,11 +153,13 @@ public class App extends Application {
         screens.put("signup", new SignupScreen(this));
         screens.put("signin", new SigninScreen(this));
         screens.put("main", new MainScreen(this));
+        screens.put("levels", new LevelsScreen(this));
+        screens.put("youWin", new YouWinScreen(this));
         screens.put("invitation", new InvitationScreen(this));
         screens.put("multiOnlinePlayers", new MultiOnlinePlayers(this));
-        
-//                
+        screens.put("playWithComputerEasyGameBoard", new PlayWithComputerEasyGameBoardScreen(this));
 
+//                
     }
 
     public void showAlert(String title, String msg) {
@@ -170,7 +173,7 @@ public class App extends Application {
                 a.show();
             }
         });
-        
+
     }
 
     public void setScreen(String screenName) {
@@ -181,11 +184,11 @@ public class App extends Application {
             }
         });
     }
-    
+
     public DataOutputStream getDataOutputStream() {
         return dataOutputStream;
     }
-    
+
     public void sendInvitation(int playerId) {
         JsonObject request = new JsonObject();
         JsonObject data = new JsonObject();
@@ -199,7 +202,7 @@ public class App extends Application {
             ex.printStackTrace();
         }
     }
-    
+
     private void makePaneDraggable(Stage primaryStage) {
         screens.forEach((key, value) -> {
             value.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -218,7 +221,7 @@ public class App extends Application {
             });
         });
     }
-    
+
     public void exit() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("type", "signout");
@@ -230,6 +233,19 @@ public class App extends Application {
         }
         Platform.exit();
         System.exit(0);
+    }
+
+    public void addPointsLocalGame(int points) {
+        JsonObject request = new JsonObject();
+        JsonObject data = new JsonObject();
+        request.add("data", data);
+        request.addProperty("type", "won-local-game");
+        data.addProperty("added-points", points);
+        try {
+            getDataOutputStream().writeUTF(request.toString());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
