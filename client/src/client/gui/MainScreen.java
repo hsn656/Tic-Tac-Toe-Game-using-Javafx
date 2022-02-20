@@ -92,7 +92,7 @@ public class MainScreen extends Pane {
         });
         HBox hBox = new HBox(exit);
         hBox.setLayoutX(43);
-        hBox.setLayoutY(750);
+        hBox.setLayoutY(735);
         challengeComp.setId("main_button");
         challengePlayer.setId("main_button");
         exit.setId("main_button");

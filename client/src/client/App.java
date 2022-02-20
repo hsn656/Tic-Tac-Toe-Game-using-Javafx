@@ -14,7 +14,6 @@ import client.gui.NooneIsTheWinnerScreen;
 import client.gui.PlayWithComputerEasyGameBoardScreen;
 import client.gui.PlayWithComputerHARDGameBoardScreen;
 import client.gui.PlayWithComputerNormalGameBoardScreen;
-
 import client.gui.SigninScreen;
 import client.gui.SignupScreen;
 import client.gui.YouWinScreen;
@@ -92,7 +91,10 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
         pStage = primaryStage;
-        primaryStage.setFullScreen(true);
+
+        primaryStage.setWidth(1200);
+        primaryStage.setHeight(841);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("TIC TAC TOE!");
 //        mainScene = new Scene(screens.get("signup"), 1350, 700);
         mainScene = new Scene(screens.get("signin"), 1350, 1200);
@@ -114,7 +116,6 @@ public class App extends Application {
                     jsonObject.addProperty("type", "terminated-game");
                     try {
                         dataOutputStream.writeUTF(jsonObject.toString());
-
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -157,8 +158,6 @@ public class App extends Application {
         screens.put("playWithComputerHARDGameBoard", new PlayWithComputerHARDGameBoardScreen(this));
         screens.put("hardLuck", new HardLuckScreen(this));
         screens.put("nooneIsTheWinner", new NooneIsTheWinnerScreen(this));
-
-                
     }
 
     public void showAlert(String title, String msg) {
@@ -245,5 +244,4 @@ public class App extends Application {
             ex.printStackTrace();
         }
     }
-
 }
