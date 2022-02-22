@@ -1,42 +1,1000 @@
-/*================signup screen==============*/
-#signup {
-  -fx-background-color: #d07576;
-  -fx-text-fill: white;
-  -fx-border-radius: 55px;
-  -fx-border-radius: 45px;
-  -fx-background-radius: 55px;
-   -fx-font-size: 18pt;
+
+#overHardLuck
+{
+    -fx-background-image: url("/images/lll.png");
+    -fx-background-repeat: no-repeat;   
+    -fx-background-position: center center;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+    -fx-background-size:cover;
+    -fx-border-radius: 127.5px;
+
+}
+#playerName{
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-size: 30px;
+}
+#alreadyRegisteredLabel{
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-size: 20px;
+}
+#rectBack
+{
+    /*-fx-background-image: url("/images/back1.jpg");*/
+    
+    -fx-background-repeat: no-repeat;   
+    -fx-background-position: center center;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+     -fx-background-radius: 127.5px;
+}
+#acceptInvitation:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#declineInvitation:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
 }
 
-#signup:hover {
-    -fx-background-color: #000000;
-  -fx-border-size: 10px;
-  -fx-border-color: #000000;  
-}
+#regionInvitationScreen
+{
 
+    /*-fx-background-image: url("/images/back1.jpg");*/
+    -fx-background-repeat: no-repeat;   
+    -fx-background-position: center center;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+}
+#vboxInvitationScreen{
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+    -fx-border-color: black;
+    -fx-fill-width: false; 
+    -fx-alignment: CENTER;
+}
+#playerWantsToChallengeYou
+{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.8) -20.08%, #FFD369 22.14%, #FFD369 79.16%, rgba(255, 255, 255, 0.58) 117.68%);
+    
+    
+    
+   -fx-opacity: 0.76;
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-text-fill:#FFFFFF
+}
+#declineInvitation{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.82) -3.46%, rgba(208, 117, 118, 0.82) 19.17%, rgba(255, 211, 105, 0.82) 74.13%, rgba(255, 255, 255, 0.82) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 28px;
+    -fx-text-fill:#FFFFFF
+}
+#acceptInvitation{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.4018) -3.46%, rgba(255, 211, 105, 0.82) 19.17%, rgba(153, 192, 86, 0.82) 45.04%, rgba(153, 192, 86, 0.82) 78.45%, rgba(255, 255, 255, 0.4838) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 28px;
+    -fx-text-fill:#FFFFFF
+}
+#sendChatMainScreen:selected {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#sendChatMainScreen{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.4018) -3.46%, rgba(255, 211, 105, 0.82) 19.17%, rgba(153, 192, 86, 0.82) 45.04%, rgba(153, 192, 86, 0.82) 78.45%, rgba(255, 255, 255, 0.4838) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#challengeScrolPaneMainScreen:selected {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#challengeScrolPaneMainScreen{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.4018) -3.46%, rgba(255, 211, 105, 0.82) 19.17%, rgba(153, 192, 86, 0.82) 45.04%, rgba(153, 192, 86, 0.82) 78.45%, rgba(255, 255, 255, 0.4838) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#offlineChallengeScrolPaneMainScreen{
+       -fx-background-color: grey;
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:black;
+}
+#MainScreenGridPane{
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+    -fx-border-color: black;
+    -fx-fill-width: false; 
+    -fx-position-shape: top;  
+    -fx-hgap: 70;
+    -fx-TRANSPARENT:.8;
+    -fx-fill-width: false;
+    -fx-background-color: black;
+
+}
+#scoreLabelGridPane{
+    -fx-font-family: "Digital Numbers";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height: 5px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-color: #FFFFFF;
+}
+#playerButton{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.82) -3.46%, rgba(208, 117, 118, 0.82) 19.17%, rgba(255, 211, 105, 0.82) 74.13%, rgba(255, 255, 255, 0.82) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 15pt;
+    -fx-text-fill:#FFFFFF;
+
+}
+#compButton{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.4018) -3.46%, rgba(255, 211, 105, 0.82) 19.17%, rgba(153, 192, 86, 0.82) 45.04%, rgba(153, 192, 86, 0.82) 78.45%, rgba(255, 255, 255, 0.4838) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 15pt;
+    -fx-text-fill:#FFFFFF
+}
+#compButton:selected{
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#playerButton:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#MainScreenPane
+{
+    -fx-background-image: url(/images/main.png);
+/*    -fx-background-fills: linear-gradient(rgb(255, 185, 198) 0%, rgb(105, 79, 246) 50%);*/
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height:42px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-border-width: 0px;
+    -fx-color: #FFFFFF;    
+}
+#stackGameboard
+{
+/*    -fx-background-image: url("/images/back2.png");
+    -fx-background-repeat: stretch;   */
+    -fx-background-size: 1960 1200;
+    -fx-background-color: linear-gradient(0deg, rgb(255, 185, 198), rgb(105, 79, 246));
+    /*-fx-background-position: center center;*/
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height: 42px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-text-fill: #FFFFFF;
+    -fx-color: #FFFFFF;
+}
+#stack
+{
+    -fx-background-size: 1450 800;
+/*    -fx-background-image: url("/images/background.png");*/
+    -fx-background-repeat: stretch;   
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+#stackSignin
+{
+    -fx-background-image: url(/images/back.jpg);
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 27px;
+    -fx-line-height: 38px;
+    /* identical to box height */
+
+    -fx-display: flex;
+    -fx-text-alignment: center;
+    -fx-text-align: center;
+    -fx-text-transform: uppercase;
+
+    -fx-text-fill: #FFFFFF;
+
+}
+#vbox{
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+    -fx-border-color: black;
+    -fx-fill-width: false; 
+    -fx-alignment: CENTER;
+
+}
+#rec
+{
+/*    -fx-background-image: url("/images/fd.png");*/
+    -fx-background-size: 450 550;
+    -fx-background-repeat: stretch;   
+    -fx-background-position: center center;
+
+}
+#recSignin
+{
+
+/*    -fx-background-image: url("/images/back1.jpg");*/
+    -fx-background-repeat: no-repeat;   
+    -fx-background-position: center center;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+}
 #name
 {
     -fx-border-radius: 18px;
     -fx-background-radius: 18px;
-    -fx-min-width: 600;
-    -fx-max-width: 600;
-    -fx-min-height: 60;
+    -fx-min-width: 320;
+    -fx-min-height: 40;
     -fx-alignment: center;
     -fx-font-family: 'walter turncoat';
     -fx-font-size: 15pt;
 }
+ToggleButton{
+    -fx-border-radius: 35px;
+    -fx-background-radius: 35px;
+    -fx-background-color: linear-gradient(to left,rgba(253, 253, 253, 0) -13.23%, #FFD369 18.23%, #D07576 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-font-family: 'walter turncoat';
+    -fx-font-style: normal;
+    -fx-font-weight: Bold;
+    -fx-font-size: 27px;
+    -fx-line-height: 38px;
+    -fx-display: flex;
+    -fx-text-alignment: center;
+    -fx-text-align: center;
+    -fx-text-transform: uppercase;
+    -fx-text-fill: #FFFFFF;
+}
+ToggleButton:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
 
-#recSignin
+
+
+Label
 {
-    -fx-background-color: rgb(110, 197, 193);
+    -fx-text-fill: white
+}
+#lose
+{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.8) -20.08%, #FFD369 22.14%, #FFD369 79.16%, rgba(255, 255, 255, 0.58) 117.68%);
+
+    -fx-opacity: 0.76;
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-text-fill:#FFFFFF
+}
+#noOneIsTheWinner
+{
+    -fx-background-image: url("/images/equal.png");
+    -fx-background-repeat: no-repeat;   
+    -fx-background-position: center center;
     -fx-border-style: solid;
     -fx-border-width: 2;
-     -fx-alignment: center;
+    -fx-background-size:cover;
+    -fx-border-radius: 127.5px;
+
+}
+#back{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.82) -3.46%, rgba(208, 117, 118, 0.82) 19.17%, rgba(255, 211, 105, 0.82) 74.13%, rgba(255, 255, 255, 0.82) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#playAgain{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.4018) -3.46%, rgba(255, 211, 105, 0.82) 19.17%, rgba(153, 192, 86, 0.82) 45.04%, rgba(153, 192, 86, 0.82) 78.45%, rgba(255, 255, 255, 0.4838) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#back:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#playAgain:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
 }
 
-#alreadyRegisteredLabel {
-  -fx-font-family: "Walter Turncoat";
-  -fx-font-size: 18pt;
-  -fx-text-fill: white;
+textArea
+{
+    -fx-border-radius: 11px;
+
+
+
+}
+/*#signin{
+    -fx-background-color: linear-gradient(to left,rgba(253, 253, 253, 0) -13.23%, #FFD369 18.23%, #D07576 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 27px;
+    -fx-line-height: 38px;
+     identical to box height 
+
+    -fx-display: flex;
+    -fx-text-alignment: center;
+    -fx-text-align: center;
+    -fx-text-transform: uppercase;
+
+    -fx-text-fill: #FFFFFF;
+
+}*/
+#signinButton{
+    -fx-background-color: linear-gradient(to left,rgba(253, 253, 253, 0) -13.23%, #FFD369 18.23%, #D07576 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-text-fill:white;
+    -fx-border-radius:55px;
+    -fx-border-radius: 45px;
+    -fx-background-radius: 55px;
+
+}
+#signinButton:selected {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#signup{
+    -fx-background-color: linear-gradient(to left,rgba(253, 253, 253, 0) -13.23%, #FFD369 18.23%, #D07576 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-text-fill:white;
+    -fx-border-radius:55px;
+    -fx-border-radius: 45px;
+    -fx-background-radius: 55px;
+
+}
+#signup:selected {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
 }
 
+#back1{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.82) -3.46%, rgba(208, 117, 118, 0.82) 19.17%, rgba(255, 211, 105, 0.82) 74.13%, rgba(255, 255, 255, 0.82) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#back1:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+Circle{
+    -fx-background-color: green;
+}
+#scoreLabel{
+    -fx-font-family: "Digital Numbers";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height: 42px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-color: #FFFFFF;
+}
+#label{
+    -fx-font-size: 200px;
+}
+#x{
+    -fx-font-size: 200px;
+    -fx-text-fill: #FFD369;
+}
+#o{
+    -fx-font-size: 200px;
+    -fx-text-fill: #FFFFFF;
+}
+
+TextField
+{
+
+    -fx-border-radius: 11px;
+    -fx-background-radius: 11px;
+    -fx-alignment: CENTER
+}
+PasswordField
+{
+
+    -fx-border-radius: 11px;
+    -fx-background-radius: 11px;
+    -fx-alignment: CENTER
+}
+
+#siginLabel
+{
+    -fx-font-size: 32;
+
+}
+
+#ChooseALevel
+{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-text-fill:#FFFFFF
+}
+#easyButton{
+    -fx-background-color: linear-gradient(to left, rgba(253, 253, 253, 0.7) -25.06%, #99C056 20.01%, #99C056 79.07%, rgba(249, 249, 249, 0.67) 124.14%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 35px;
+    -fx-text-fill:#FFFFFF
+}
+#normalButton{
+    -fx-background-color: linear-gradient(to left, rgba(253, 253, 253, 0.7) -25.06%, #FFD369 20.01%, #FFD369 79.07%, rgba(249, 249, 249, 0.67) 124.14%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 35px;
+    -fx-text-fill:#FFFFFF
+}
+#hardButton{
+    -fx-background-color: linear-gradient(to left, rgba(253, 253, 253, 0.7) -25.06%, #D07576 20.01%, #D07576 79.07%, rgba(249, 249, 249, 0.67) 124.14%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 35px;
+    -fx-text-fill:#FFFFFF
+}
+#easyButton:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#normalButton:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#hardButton:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#stackGameResultScreen
+{
+    -fx-background-image: url(/images/main.png);
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height: 42px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-color: #FFFFFF;
+}
+#stackGameboard
+{
+/*    -fx-background-image: url("/images/back2.png");*/
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 1960 1300;
+    -fx-background-position: center center;
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height: 42px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-text-fill: #FFFFFF;
+    -fx-color: #FFFFFF;
+}
+#stackInvitation
+{
+/*    -fx-background-image: url(/images/back.jpg);*/
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height: 42px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-color: #FFFFFF;
+}
+#stack
+{
+    -fx-background-size: 1450 800;
+/*    -fx-background-image: url("/images/background.png");*/
+    -fx-background-repeat: stretch;   
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+#stackSignin
+{
+/*    -fx-background-image: url(/images/back.jpg);*/
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 27px;
+    -fx-line-height: 38px;
+    /* identical to box height */
+    -fx-display: flex;
+    -fx-text-alignment: center;
+    -fx-text-align: center;
+    -fx-text-transform: uppercase;
+    -fx-text-fill: #FFFFFF;
+
+}
+#vbox{
+    -fx-border-style: none;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-fill-width: false; 
+    -fx-alignment: CENTER;
+
+}
+#rec
+{
+/*    -fx-background-image: url("/images/fd.png");*/
+    -fx-background-size: 450 550;
+    -fx-background-repeat: stretch;   
+    -fx-background-position: center center;
+}
+#recSignin
+{
+/*    -fx-background-image: url("/images/back1.jpg");*/
+    -fx-background-repeat: no-repeat;   
+    -fx-background-position: center center;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+}
+#name
+{
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+    -fx-min-width: 320;
+    -fx-min-height: 40;
+    -fx-alignment: center;
+    -fx-font-family: 'walter turncoat';
+    -fx-font-size: 15pt;
+}
+ToggleButton{
+    -fx-border-radius: 35px;
+    -fx-background-radius: 35px;
+    -fx-background-color: linear-gradient(to left,rgba(253, 253, 253, 0) -13.23%, #FFD369 18.23%, #D07576 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-font-family: 'walter turncoat';
+    -fx-font-style: normal;
+    -fx-font-weight: Bold;
+    -fx-font-size: 27px;
+    -fx-line-height: 38px;
+    -fx-display: flex;
+    -fx-text-alignment: center;
+    -fx-text-align: center;
+    -fx-text-transform: uppercase;
+    -fx-text-fill: #FFFFFF;
+}
+ToggleButton:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+
+
+
+Label
+{
+    -fx-text-fill: white;
+}
+#lose
+{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.8) -20.08%, #FFD369 22.14%, #FFD369 79.16%, rgba(255, 255, 255, 0.58) 117.68%);
+    -fx-opacity: 0.76;
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-text-fill:#FFFFFF;
+}
+#over
+{
+    -fx-background-image: url("/images/win.png");
+    -fx-background-repeat: no-repeat;   
+    -fx-background-position: center center;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+    -fx-background-size:cover;
+    -fx-border-radius: 127.5px;
+
+}
+#back{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.82) -3.46%, rgba(208, 117, 118, 0.82) 19.17%, rgba(255, 211, 105, 0.82) 74.13%, rgba(255, 255, 255, 0.82) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#playAgain{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.4018) -3.46%, rgba(255, 211, 105, 0.82) 19.17%, rgba(153, 192, 86, 0.82) 45.04%, rgba(153, 192, 86, 0.82) 78.45%, rgba(255, 255, 255, 0.4838) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#back:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#playAgain:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+
+textArea
+{
+    -fx-border-radius: 11px;
+
+
+
+}
+/*#signin{
+    -fx-background-color: linear-gradient(to left,rgba(253, 253, 253, 0) -13.23%, #FFD369 18.23%, #D07576 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 27px;
+    -fx-line-height: 38px;
+     identical to box height 
+
+    -fx-display: flex;
+    -fx-text-alignment: center;
+    -fx-text-align: center;
+    -fx-text-transform: uppercase;
+
+    -fx-text-fill: #FFFFFF;
+
+}*/
+#signin{
+    -fx-background-color: linear-gradient(to left,rgba(253, 253, 253, 0) -13.23%, #FFD369 18.23%, #D07576 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-text-fill:white;
+    -fx-border-radius:55px;
+    -fx-border-radius: 45px;
+    -fx-background-radius: 55px;
+
+}
+
+#back1{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.82) -3.46%, rgba(208, 117, 118, 0.82) 19.17%, rgba(255, 211, 105, 0.82) 74.13%, rgba(255, 255, 255, 0.82) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#back1:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+Circle{
+    -fx-background-color: green;
+}
+#scoreLabel{
+    -fx-font-family: "Digital Numbers";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height: 42px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-color: #FFFFFF;
+}
+#label{
+    -fx-font-size: 180px;
+}
+#X{
+    -fx-font-size: 180px;
+    -fx-text-fill: #FFD369;
+}
+#O{
+    -fx-font-size: 180px;
+    -fx-text-fill: #FFFFFF;
+}
+
+TextField
+{
+
+    -fx-border-radius: 11px;
+    -fx-background-radius: 11px;
+    -fx-alignment: BASELINE_CENTER
+}
+
+#siginLabel
+{
+    -fx-font-size: 32;
+
+}
+#GridMain{
+    /*-fx-border-color: #000000;*/
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+#scrollPane1{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+#scrollPane1 > .viewport{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+#send{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.4018) -3.46%, rgba(255, 211, 105, 0.82) 19.17%, rgba(153, 192, 86, 0.82) 45.04%, rgba(153, 192, 86, 0.82) 78.45%, rgba(255, 255, 255, 0.4838) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF;
+    
+}
+#send:selected {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+
+
+
+.text-area {
+    -fx-background-color: rgba(0,0,0,0.5);
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.text-area   {
+    -fx-text-fill:white;
+    -fx-font-size: 16px;
+}
+#pane
+{
+/*    -fx-background-image: url(/images/back2.png);*/
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 1960 1200;
+    -fx-background-position: center center;
+    -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 30px;
+    -fx-line-height: 42px;
+    -fx-display: flex;
+    -fx-align-items: flex-end;
+    -fx-text-transform: capitalize;
+    -fx-text-fill: #FFFFFF;
+    -fx-color: #FFFFFF;
+}
+#scrolPanePlaylistScreen{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+#scrolPanePlaylistScreen > .viewport{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+#ChallengePlayerList{
+    -fx-background-color: linear-gradient(to left, rgba(255, 255, 255, 0.4018) -3.46%, rgba(255, 211, 105, 0.82) 19.17%, rgba(153, 192, 86, 0.82) 45.04%, rgba(153, 192, 86, 0.82) 78.45%, rgba(255, 255, 255, 0.4838) 100%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF;
+}
+#ChallengePlayerList:selected {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+
+#welcome{
+    -fx-text-fill:#FFD369;    
+        -fx-font-family: "Walter Turncoat";
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-font-size: 27px;
+    -fx-line-height: 38px;
+  
+}
+
+#BackToMain{
+    -fx-background-color: linear-gradient(to left, rgba(253, 253, 253, 0) -13.23%, #99C056 18.23%, #99C056 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#BackToMain:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}
+#ExitFromGame{
+    -fx-background-color: linear-gradient(to left, rgba(253, 253, 253, 0) -13.23%, #D07576 18.23%, #D07576 74.23%, rgba(249, 249, 249, 0.6) 107.57%);
+    -fx-border-radius: 22px;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-background-radius: 22px;
+    -fx-font-size: 20px;
+    -fx-text-fill:#FFFFFF
+}
+#ExitFromGame:focused {
+    -fx-background-color:
+        -fx-focus-color,
+        linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
+        linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
+    -fx-border-size: 10px;
+    -fx-border-color: #000000;
+    -fx-text-fill:#000000;
+}

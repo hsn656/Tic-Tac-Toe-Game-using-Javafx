@@ -18,7 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -27,6 +28,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+/**
+ *
+ * @author Abdallah
+ */
 
 public class MainScreen extends Pane {
 
@@ -54,44 +60,52 @@ public class MainScreen extends Pane {
 
     public MainScreen(App app) {
         this.app = app;
-        ToggleButton challengeComp = new ToggleButton("CHALLENGE COMPUTER");
+        Button challengeComp = new Button("Vs Computer");
         challengeComp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 app.setScreen("levels");
             }
         });
-        challengeComp.setPrefSize(280, 50);
-        challengeComp.setId("compButton");
-        ToggleButton challengePlayer = new ToggleButton("CHALLENGE PLAYER");
+        challengeComp.setPrefSize(190, 50);
+        challengeComp.setStyle("-fx-text-fill: green");
+        Button challengePlayer = new Button("Vs Player");
+        challengePlayer.setStyle("-fx-text-fill: red");
         challengePlayer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 app.setScreen("playerList");
             }
         });
-        challengePlayer.setPrefSize(280, 50);
+        challengePlayer.setPrefSize(190, 50);
         challengePlayer.setId("playerButton");
         HBox buttonBox = new HBox(20, challengeComp, challengePlayer);
         buttonBox.setAlignment(Pos.CENTER_LEFT);
-        buttonBox.setLayoutX(80);
-        buttonBox.setLayoutY(450);
-        gridPane = new GridPane();
-        gridPane.setId("GridMain");
-        gridPane.setHgap(30);
-        gridPane.setPrefSize(495.2, 250.0);
-
-        //////////////////////////////////////////////////////////
-        Button exit = new Button("EXIT");
+        buttonBox.setLayoutX(43);
+        buttonBox.setLayoutY(676);
+        Button exit = new Button("EXIT  ;___;  o/");
         exit.setId("ExitFromGame");
-        exit.setPrefSize(110, 10);
+        exit.setPrefSize(402, 50);
+        exit.setStyle("-fx-text-fill: blue");
         exit.setOnAction((t) -> {
             app.exit();
         });
-
         HBox hBox = new HBox(exit);
-        hBox.setLayoutX(1100);
-        hBox.setLayoutY(300);
+        hBox.setLayoutX(43);
+        hBox.setLayoutY(735);
+        challengeComp.setId("main_button");
+        challengePlayer.setId("main_button");
+        exit.setId("main_button");
+/////////////////////////////////////////////////////////
+
+        gridPane = new GridPane();
+        gridPane.setId("GridMain");
+        gridPane.setHgap(30);
+        gridPane.setPrefSize(516, 224.0);
+
+
+        //////////////////////////////////////////////////////////
+        
         /////////////////////////////////////////////////////////////////
 
         ScrollPane scrollPane = new ScrollPane(gridPane);
@@ -104,51 +118,70 @@ public class MainScreen extends Pane {
 
         VBox v = new VBox();
         v.getChildren().add(scrollPane);
-        v.setLayoutX(930);
-        v.setLayoutY(0);
+        v.setLayoutX(338);
+        v.setLayoutY(305);
 
         playerName2 = new Label();
         playerName2.setLayoutX(200);
-        playerName2.setLayoutY(260);
+        playerName2.setLayoutY(558);
+        playerName2.setId("welcome");
 
         welcome = new Label();
         welcome.setId("welcome");
-        welcome.setLayoutX(150);
-        welcome.setLayoutY(200);
+        welcome.setLayoutX(43);
+        welcome.setLayoutY(558);
+
+        Label tictactoe = new Label("Tic Tac Toe");
+        tictactoe.setLayoutX(470);
+        tictactoe.setLayoutY(2);
+        tictactoe.setId("tictactoe");
+
+      
+        Image image = new Image(getClass().getResourceAsStream("/images/Tic.png"));
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setLayoutX(446);
+        imageView.setLayoutY(68);
+        imageView.setFitWidth(306);
+        imageView.setFitHeight(225);
+
 
         points2 = new Label();
-        points2.setLayoutX(500);
-        points2.setLayoutY(250);
+        points2.setLayoutX(200);
+        points2.setLayoutY(606);
+        points2.setId("welcome");
 
         points = new Label();
         points.setId("welcome");
-        points.setLayoutX(450);
-        points.setLayoutY(200);
+        points.setLayoutX(47);
+        points.setLayoutY(606);
 
         //String variable="WELCOME " + ;
         chatTextArea = new TextArea("");
         chatTextArea.setId("ta");
         chatTextArea.setEditable(false);
-        chatTextArea.setLayoutX(800);
-        chatTextArea.setLayoutY(420);
-        chatTextArea.setMaxWidth(220.0);
-        chatTextArea.setMaxHeight(250.0);
+        chatTextArea.setLayoutX(862);
+        chatTextArea.setLayoutY(550);
+        chatTextArea.setPrefSize(297, 180);
         chatTextArea.setWrapText(true);
 
         chatMessageArea = new TextArea("");
 
         chatMessageArea.setPromptText("Enter your Msg ");
-        chatMessageArea.setLayoutX(800);
-        chatMessageArea.setLayoutY(700);
-        chatMessageArea.setMaxWidth(220.0);
-        chatMessageArea.setMaxHeight(10.5);
+        chatMessageArea.setLayoutX(862);
+        chatMessageArea.setLayoutY(750);
+        chatMessageArea.setPrefWidth(225.0);
+        chatMessageArea.setPrefHeight(38.0);
+        chatMessageArea.setMaxWidth(225.0);
+        chatMessageArea.setMaxHeight(38.5);
         chatMessageArea.setWrapText(true);
 
         Button send = new Button();
-        send.setText("send");
+        send.setText("->");
         send.setId("sendChatMainScreen");
-        send.setLayoutX(1050);
-        send.setLayoutY(700);
+        send.setLayoutX(1101);
+        send.setLayoutY(750);
+        send.setPrefSize(58, 38);
 
         send.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -165,7 +198,7 @@ public class MainScreen extends Pane {
             }
         }
         );
-        getChildren().addAll(buttonBox, chatMessageArea, chatTextArea, send, v, hBox, welcome, points, playerName2, points2);
+        getChildren().addAll(buttonBox, chatMessageArea, chatTextArea, send, v, hBox, welcome, points, playerName2, points2,tictactoe, imageView);
         setId("MainScreenPane");
     }
 
@@ -189,7 +222,7 @@ public class MainScreen extends Pane {
             player.setFirstName(jsonPlayer.get("firstName").getAsString());
             player.setPoints(jsonPlayer.get("points").getAsInt());
             player.setId(jsonPlayer.get("id").getAsInt());
-            ToggleButton invite2 = new ToggleButton("Challenge");
+            Button invite2 = new Button("Challenge");
             if (type.equals("online")) {
                 invite2.setId("challengeScrolPaneMainScreen");
             } else if (type.equals("offline")) {
@@ -203,15 +236,14 @@ public class MainScreen extends Pane {
             });
 
             Label score2 = new Label(Integer.toString(player.getPoints()));
-            score2.setId("scoreLabel");
             Label playerName = new Label(player.getFirstName());
             playerName.setPrefWidth(100);
             Circle cir2 = new Circle(150.0f, 150.0f, 5.f);
             cir2.setFill(color);
-            gridPane.add(cir2, 0, playersListCounter);
-            gridPane.add(invite2, 3, playersListCounter);
-            gridPane.add(score2, 2, playersListCounter);
-            gridPane.add(playerName, 1, playersListCounter);
+            gridPane.add(cir2, 1, playersListCounter);
+            gridPane.add(invite2, 9, playersListCounter);
+            gridPane.add(score2, 4, playersListCounter);
+            gridPane.add(playerName, 2, playersListCounter);
             playersListCounter++;
         }
     }
@@ -243,11 +275,9 @@ public class MainScreen extends Pane {
 
     public void setWelcomePlayer(String playerName, int totalPoints) {
         playerName2.setText(playerName);
-        playerName2.setId("welcome1");
         points2.setText(Integer.toString(totalPoints));
-        points2.setId("scoreLabel");
-        welcome.setText("Welcome,");
-        points.setText("Points");
+        welcome.setText("Welcome:");
+        points.setText("Score: ");
 
     }
 }

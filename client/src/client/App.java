@@ -5,12 +5,15 @@
  */
 package client;
 
+import client.gui.HardLuckScreen;
 import client.gui.InvitationScreen;
 import client.gui.LevelsScreen;
 import client.gui.MainScreen;
 import client.gui.MultiOnlinePlayers;
+import client.gui.NooneIsTheWinnerScreen;
 import client.gui.PlayWithComputerEasyGameBoardScreen;
-
+import client.gui.PlayWithComputerHARDGameBoardScreen;
+import client.gui.PlayWithComputerNormalGameBoardScreen;
 import client.gui.SigninScreen;
 import client.gui.SignupScreen;
 import client.gui.YouWinScreen;
@@ -23,17 +26,13 @@ import java.net.Socket;
 import java.util.HashMap;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
@@ -57,7 +56,6 @@ public class App extends Application {
     public static String opposingPlayerName = "";
 
     public App() {
-
         addScreens();
         jsonHandler = new JsonHandler(this);
         try {
@@ -70,7 +68,6 @@ public class App extends Application {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
                 try {
                     while (true) {
 
@@ -86,9 +83,7 @@ public class App extends Application {
                     setScreen("signin");
                     Platform.exit();
                     ex.printStackTrace();
-
                 }
-
             }
         }).start();
     }
@@ -96,9 +91,10 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws InterruptedException {
         pStage = primaryStage;
-        primaryStage.setFullScreen(true);
-        primaryStage.setTitle("TIC TAC TOE!");
 
+        primaryStage.setFullScreen(true);
+//        primaryStage.setResizable(false);
+        primaryStage.setTitle("TIC TAC TOE!");
 //        mainScene = new Scene(screens.get("signup"), 1350, 700);
         mainScene = new Scene(screens.get("signin"), 1350, 1200);
 
@@ -119,7 +115,6 @@ public class App extends Application {
                     jsonObject.addProperty("type", "terminated-game");
                     try {
                         dataOutputStream.writeUTF(jsonObject.toString());
-
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -158,8 +153,10 @@ public class App extends Application {
         screens.put("invitation", new InvitationScreen(this));
         screens.put("multiOnlinePlayers", new MultiOnlinePlayers(this));
         screens.put("playWithComputerEasyGameBoard", new PlayWithComputerEasyGameBoardScreen(this));
-
-//                
+         screens.put("playWithComputerNormalGameBoard", new PlayWithComputerNormalGameBoardScreen(this));
+        screens.put("playWithComputerHARDGameBoard", new PlayWithComputerHARDGameBoardScreen(this));
+        screens.put("hardLuck", new HardLuckScreen(this));
+        screens.put("nooneIsTheWinner", new NooneIsTheWinnerScreen(this));
     }
 
     public void showAlert(String title, String msg) {
@@ -227,7 +224,6 @@ public class App extends Application {
         jsonObject.addProperty("type", "signout");
         try {
             dataOutputStream.writeUTF(jsonObject.toString());
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -247,5 +243,4 @@ public class App extends Application {
             ex.printStackTrace();
         }
     }
-
 }
