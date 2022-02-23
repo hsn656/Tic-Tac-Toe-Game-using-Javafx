@@ -31,7 +31,7 @@ public class JsonHandler {
         }
     }
 
-    void handle(JsonObject request, User user) {
+    void handle(JsonObject request, User user) throws IOException {
         String requestType = request.get("type").getAsString();
 
         JsonObject requestData = request.getAsJsonObject("data");
@@ -65,7 +65,7 @@ public class JsonHandler {
         }
     }
 
-    private JsonObject handleSignup(JsonObject requestData, User user) {
+    private JsonObject handleSignup(JsonObject requestData, User user) throws IOException {
         JsonObject response = new JsonObject();
         JsonObject data = new JsonObject();
         response.add("data", data);
@@ -89,6 +89,7 @@ public class JsonHandler {
                 } else {
                     response.addProperty("type", "signup-error");
                 }
+                user.getDataOutputStream().writeUTF(response.toString());
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
