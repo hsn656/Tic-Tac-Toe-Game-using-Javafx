@@ -92,9 +92,8 @@ public class App extends Application {
     public void start(Stage primaryStage) throws InterruptedException {
         pStage = primaryStage;
 
-        primaryStage.setWidth(1200);
-        primaryStage.setHeight(841);
-        primaryStage.setResizable(false);
+        primaryStage.setFullScreen(true);
+//        primaryStage.setResizable(false);
         primaryStage.setTitle("TIC TAC TOE!");
 //        mainScene = new Scene(screens.get("signup"), 1350, 700);
         mainScene = new Scene(screens.get("signin"), 1350, 1200);

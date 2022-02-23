@@ -47,7 +47,7 @@ public class PlayWithComputerHARDGameBoardScreen extends Pane {
         stack.setId("stack");
         stack.setPadding(new Insets(40, 0, 0, 50));
         stack.setHgap(150);
-        stack.setVgap(50);
+        stack.setVgap(-40);
         stack.setPrefSize(750, 700);
         checkWinner();
         for (int i = 0; i < 3; i++) {

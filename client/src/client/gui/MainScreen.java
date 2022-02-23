@@ -177,7 +177,7 @@ public class MainScreen extends Pane {
         chatMessageArea.setWrapText(true);
 
         Button send = new Button();
-        send.setText("send");
+        send.setText("->");
         send.setId("sendChatMainScreen");
         send.setLayoutX(1101);
         send.setLayoutY(750);

@@ -50,7 +50,8 @@ public class PlayWithComputerEasyGameBoardScreen extends Pane {
         stack.setId("stack");
         stack.setPadding(new Insets(40, 0, 0, 50));
         stack.setHgap(150);
-        stack.setVgap(50);
+        stack.setVgap(-40);
+       
         stack.setPrefSize(750, 700);
         checkWinner();
         for (int i = 0; i < 3; i++) {
@@ -92,7 +93,7 @@ public class PlayWithComputerEasyGameBoardScreen extends Pane {
          ///////////////////////////////////////////////////////////
             Button exit = new Button("EXIT");
         exit.setId("ExitFromGame");
-        exit.setLayoutX(280);
+        exit.setLayoutX(180);
         exit.setLayoutY(650);
         exit.setPrefSize(110, 10);
         exit.setOnAction((t) -> {
@@ -112,6 +113,7 @@ public class PlayWithComputerEasyGameBoardScreen extends Pane {
 
         VBox v = new VBox(40, hBox);
         v.setId("vbox");
+        
         v.setLayoutX(1000);
         v.setLayoutY(150);
         ///////////////////////////////////////////////////////////
