@@ -113,6 +113,7 @@ class JsonHandler {
                 System.out.println("hello hassan from switch case");
                 multiOnlinePlayers.setOpponentMoveFromServer(requestData.get("position").getAsString());
                 break;
+                
         }
     }
 

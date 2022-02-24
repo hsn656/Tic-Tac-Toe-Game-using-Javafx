@@ -62,6 +62,9 @@ public class JsonHandler {
             case "game-move":
                 response = handleGameMove(request, user);
                 break;
+                case "pause-game":
+                handlePauseGame(requestData, user);
+                break;
         }
     }
 
@@ -259,6 +262,11 @@ public class JsonHandler {
             }
         }
         return null;
+    }
+    private void handlePauseGame(JsonObject requestData, User user) {
+        if (user.getPlayer().getCurrentGame() != null) {
+            server.handleTerminatedGame(user);
+        }
     }
 
 }
