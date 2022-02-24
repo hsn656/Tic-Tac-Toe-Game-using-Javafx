@@ -53,17 +53,17 @@ public class MultiOnlinePlayers extends Pane {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 int x = i * 3 + j;
-                stack.add(l.get(x), j, i*3);
+                stack.add(l.get(x), j, i);
             }
         }
 
         rand = new Random();
         counter = 0;
-//        resetGame();
+        resetGame();
         stack.setId("stack");
         stack.setPadding(new Insets(40, 0, 0, 50));
         stack.setHgap(150);
-        stack.setVgap(50);
+        stack.setVgap(-40);
         stack.setPrefSize(750, 700);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -393,7 +393,7 @@ public class MultiOnlinePlayers extends Pane {
                  }
 
                  counter = 0;
-                // resetGame();
+                resetGame();
                  return;
              }
              if (counter == 9) {
@@ -413,12 +413,51 @@ public class MultiOnlinePlayers extends Pane {
                      }
                     app.setScreen("nooneIsTheWinner");
                      counter = 0;
-                     // resetGame();
+                     resetGame();
                  });
                  pause.play();
              }
          }
      }
 
+    public void setGameCoordinates(JsonObject gameCoordinates, int playerX_id) {
+        counter = 0;
+        gameCoordinates.keySet().forEach((position) -> {
+            String label = gameCoordinates.get(position).getAsString();
+            int index = getGamePositionAsIndex(position);
+            if (label.equals("-")) {
+                l.get(index).setText("_");
+                l.get(index).setId("label");
+            } else {
+                counter++;
+                l.get(index).setText(label);
+                l.get(index).setId(label);
+            }
+
+        });
+        System.out.println("counter: " + counter);
+        if (playerX_id == app.getCurrentPlayer().getId()) {
+            opponenetPlayerLetter = "O";
+            thisPlayerLetter = "X";
+            label1.setText(app.getCurrentPlayer().getFirstName());
+            label2.setText(challengerName);
+            turn = counter % 2 == 0;
+        } else {
+            opponenetPlayerLetter = "X";
+            thisPlayerLetter = "O";
+            label1.setText(challengerName);
+            label2.setText(app.getCurrentPlayer().getFirstName());
+            turn = counter % 2 != 0;
+        }
+        System.out.println("turn: " + turn);
+    }
     
+    private void resetGame() {
+        for (int i = 0; i < l.size(); i++) {
+            l.get(i).setText("_");
+            l.get(i).setId("label");
+        }
+        counter = 0;
+    }
+
 }

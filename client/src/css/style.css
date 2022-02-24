@@ -8,7 +8,6 @@
     -fx-border-width: 2;
     -fx-background-size:cover;
     -fx-border-radius: 127.5px;
-
 }
 #playerName{
     -fx-font-family: "Walter Turncoat";
@@ -220,7 +219,7 @@
     -fx-background-repeat: stretch;   */
 
     -fx-background-size: 1960 1200;
-    -fx-background-color: linear-gradient(0deg, rgb(255, 185, 198), rgb(105, 79, 246));
+    /*-fx-background-color: linear-gradient(0deg, rgb(255, 185, 198), rgb(105, 79, 246));*/
     /*-fx-background-position: center center;*/
     -fx-font-family: "Walter Turncoat";
     -fx-font-style: normal;
@@ -839,14 +838,14 @@ Circle{
     -fx-color: #FFFFFF;
 }
 #label{
-    -fx-font-size: 180px;
+    -fx-font-size: 170px;
 }
 #X{
-    -fx-font-size: 180px;
+    -fx-font-size: 170px;
     -fx-text-fill: #FFD369;
 }
 #O{
-    -fx-font-size: 180px;
+    -fx-font-size: 170px;
     -fx-text-fill: #FFFFFF;
 }
 

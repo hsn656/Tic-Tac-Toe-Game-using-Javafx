@@ -62,7 +62,7 @@ public class JsonHandler {
             case "game-move":
                 response = handleGameMove(request, user);
                 break;
-                case "pause-game":
+            case "pause-game":
                 handlePauseGame(requestData, user);
                 break;
         }

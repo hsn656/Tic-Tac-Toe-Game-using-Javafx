@@ -213,5 +213,61 @@ public class DatabaseManager {
         return terminatedGame;
     }
 
+    public boolean insertGame(Game gameToSave) throws ClassNotFoundException {
+        boolean success = false;
+        Integer playerXId = gameToSave.getPlayerX().getId();
+        Integer playerOId = gameToSave.getPlayerO().getId();
+        String gameStatus = gameToSave.getStatus();
+        String coordinatesToSave = gameToSave.getCoordinates().toString();
+        
+        try {
+            establishConnection();
+            
+            PreparedStatement preparedStatment = connection.prepareStatement("INSERT INTO game (player1_id, player2_id, session_status, coordinates) VALUES (?, ?, ?, ?);");
+            preparedStatment.setString(1, playerXId.toString());
+            preparedStatment.setString(2, playerOId.toString());
+            preparedStatment.setString(3, gameStatus);
+            preparedStatment.setString(4, coordinatesToSave);
+            preparedStatment.executeUpdate();
+            
+            preparedStatment.close();
+            connection.close();
+            success = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        return success;
+    }
+
+    public boolean updateGame(Game gameToUpdate) {
+        boolean updated = false;
+        PreparedStatement pst;
+        int playerXId = gameToUpdate.getPlayerX().getId();
+        int playerOId = gameToUpdate.getPlayerO().getId();
+        int gameId = gameToUpdate.getGameId();
+        String sessionStatus = gameToUpdate.getGameStatus().toString();
+        String coordinates = gameToUpdate.getCoordinates().toString();
+        
+        try {
+            establishConnection();
+            
+            pst = connection.prepareStatement("UPDATE game SET player1_id = ?, player2_id = ?, session_status = ?, coordinates = ? WHERE id = ?;");
+            pst.setInt(1, playerXId);
+            pst.setInt(2, playerOId);
+            pst.setString(3, sessionStatus);
+            pst.setString(4, coordinates);
+            pst.setInt(5, gameId);
+            
+            pst.executeUpdate();
+            pst.close();
+            updated = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return updated;
+    }
+
 
 }

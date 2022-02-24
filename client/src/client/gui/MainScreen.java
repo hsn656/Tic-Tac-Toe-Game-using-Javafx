@@ -137,13 +137,13 @@ public class MainScreen extends Pane {
         tictactoe.setId("tictactoe");
 
       
-        Image image = new Image(getClass().getResourceAsStream("/images/Tic.png"));
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        imageView.setLayoutX(446);
-        imageView.setLayoutY(68);
-        imageView.setFitWidth(306);
-        imageView.setFitHeight(225);
+//        Image image = new Image(getClass().getResourceAsStream("/images/Tic.png"));
+//        ImageView imageView = new ImageView();
+//        imageView.setImage(image);
+//        imageView.setLayoutX(446);
+//        imageView.setLayoutY(68);
+//        imageView.setFitWidth(306);
+//        imageView.setFitHeight(225);
 
 
         points2 = new Label();
@@ -198,7 +198,7 @@ public class MainScreen extends Pane {
             }
         }
         );
-        getChildren().addAll(buttonBox, chatMessageArea, chatTextArea, send, v, hBox, welcome, points, playerName2, points2,tictactoe, imageView);
+        getChildren().addAll(buttonBox, chatMessageArea, chatTextArea, send, v, hBox, welcome, points, playerName2, points2,tictactoe);//, imageView);
         setId("MainScreenPane");
     }
 

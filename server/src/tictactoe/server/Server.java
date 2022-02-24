@@ -253,9 +253,40 @@ public class Server extends Thread {
         
     }
     
-    public void handleTerminatedGame(User user) {
-        System.out.print("handleTerminatedGame function is not implemented yet");
+     public void handleTerminatedGame(User user) {
+        Game currentGame = user.player.getCurrentGame();
+        currentGame.setGameStatus(Game.Status.terminated);
+        User secondUser = new User();
+        if (user.player.getId() == currentGame.getPlayerX().getId()) {
+            secondUser = onlinePlayers.get(currentGame.getPlayerO().getId());
+        } else {
+            secondUser = onlinePlayers.get(currentGame.getPlayerX().getId());
+        }
+
+        try {
+            if (currentGame.getGameId() > 0) {
+                databaseManager.updateGame(currentGame);
+            } else {
+                databaseManager.insertGame(currentGame);
+            }
+        } catch (ClassNotFoundException ex) {
+            app.guiLog("Connection error with the database.");
+        }
+        JsonObject alertTerminatedGame = new JsonObject();
+        alertTerminatedGame.addProperty("type", "terminated-game");
+        JsonObject data = new JsonObject();
+        alertTerminatedGame.add("data", data);
+        currentGame.getPlayerX().setCurrentGame(null);
+        currentGame.getPlayerO().setCurrentGame(null);
+        try {
+            secondUser.dataOutputStream.writeUTF(alertTerminatedGame.toString());
+
+        } catch (Exception e) {
+            app.guiLog("An issue occurred while attempting to write to the output stream");
+        }
     }
+
+    
     public void addToOnlinePlayers(int id, User newUser) {
         User user = offlinePlayers.remove(id);
         newUser.player.setOnline(true);

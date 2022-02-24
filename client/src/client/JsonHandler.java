@@ -113,6 +113,21 @@ class JsonHandler {
                 System.out.println("hello hassan from switch case");
                 multiOnlinePlayers.setOpponentMoveFromServer(requestData.get("position").getAsString());
                 break;
+            case "terminated-game":
+                app.showAlert(App.opposingPlayerName + " left the game", "Switching to main screen.");
+                app.setScreen("main");
+                App.inMultiplayerGame = false;
+                App.opposingPlayerId = -1;
+                App.opposingPlayerName = "";
+                break;
+            case "terminated-game-data":
+                JsonObject gameCoordinates = requestData.get("game-coordinates").getAsJsonObject();
+                Platform.runLater(() -> {
+                    multiOnlinePlayers.setGameCoordinates(gameCoordinates,
+                            requestData.get("playerX_id").getAsInt());
+                });
+
+                break;
                 
         }
     }
