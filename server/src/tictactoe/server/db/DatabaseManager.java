@@ -133,6 +133,28 @@ public class DatabaseManager {
         }
         return playerSignIn;
     }
+//updatePlayerScore
+    public Player updatePlayerScore(Player player) throws ClassNotFoundException {
+        PreparedStatement pst;
+        int playerPoints = player.getPoints();
+        try {
+            establishConnection();
+            player.setPoints(player.getPoints());
+            
+            pst = connection.prepareStatement("UPDATE player SET points=? WHERE id=?");
+            pst.setInt(1, player.getPoints());
+            pst.setInt(2, player.getId());
+            
+            pst.executeUpdate();
+            pst.close();
+            connection.close();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return player;
+    }
     
     public boolean isEmailExists(String email) throws SQLException {
         

@@ -65,6 +65,9 @@ public class JsonHandler {
             case "pause-game":
                 handlePauseGame(requestData, user);
                 break;
+            case "multiplayer-game-end":
+                response = handleGameEnd(requestData, user);
+                break;
         }
     }
 
@@ -267,6 +270,50 @@ public class JsonHandler {
         if (user.getPlayer().getCurrentGame() != null) {
             server.handleTerminatedGame(user);
         }
+    }
+private JsonObject handleGameEnd(JsonObject requestData, User user) {
+        Player winnerPlayer = null;
+        Game game = user.getPlayer().getCurrentGame();
+        if (game == null) {
+            return null;
+        }
+        int winnerId = requestData.get("winner-id").getAsInt();
+        game.setWinnerId(winnerId);
+        game.setGameStatus(Game.Status.finished);
+        try {
+            if (game.getGameId() > 0) {
+                databaseManager.updateGame(game);
+            } else {
+                databaseManager.insertGame(game);
+            }
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        Player playerX = game.getPlayerX();
+        Player playerO = game.getPlayerO();
+        playerX.setCurrentGame(null);
+        playerO.setCurrentGame(null);
+        if (playerX.getId() == winnerId) {
+            playerX.incrementPoints(50);
+            server.repositionOnlinePlayer(playerX);
+            winnerPlayer = playerX;
+        }
+        if (playerO.getId() == winnerId) {
+            playerO.incrementPoints(50);
+            server.repositionOnlinePlayer(playerO);
+            winnerPlayer = playerO;
+
+        }
+        try {
+            System.out.println("winner playwer:" + winnerPlayer + " id:" + winnerId);
+            if (winnerPlayer != null) {
+                databaseManager.updatePlayerScore(winnerPlayer);
+            }
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        server.sendUpdatedPlayerList();
+        return null;
     }
 
 }

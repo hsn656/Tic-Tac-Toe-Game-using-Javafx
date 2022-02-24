@@ -357,6 +357,10 @@ public class Server extends Thread {
 
         sendToAllOnlinePlayers(request);
     }
+    public void repositionOnlinePlayer(Player player){
+        sortedOnlinePlayersbyPoints.remove(player);
+        sortedOnlinePlayersbyPoints.add(player);
+    }
 
     
 }
