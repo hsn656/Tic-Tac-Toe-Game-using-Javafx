@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -60,52 +61,39 @@ public class MainScreen extends Pane {
 
     public MainScreen(App app) {
         this.app = app;
-        Button challengeComp = new Button("Vs Computer");
+        ToggleButton challengeComp = new ToggleButton("CHALLENGE COMPUTER");
         challengeComp.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 app.setScreen("levels");
             }
         });
-        challengeComp.setPrefSize(190, 50);
-        challengeComp.setStyle("-fx-text-fill: green");
-        Button challengePlayer = new Button("Vs Player");
-        challengePlayer.setStyle("-fx-text-fill: red");
-        challengePlayer.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                app.setScreen("playerList");
-            }
-        });
-        challengePlayer.setPrefSize(190, 50);
-        challengePlayer.setId("playerButton");
-        HBox buttonBox = new HBox(20, challengeComp, challengePlayer);
-        buttonBox.setAlignment(Pos.CENTER_LEFT);
-        buttonBox.setLayoutX(43);
-        buttonBox.setLayoutY(676);
-        Button exit = new Button("EXIT  ;___;  o/");
+        challengeComp.setPrefSize(280, 50);
+        challengeComp.setId("compButton");
+        Button exit = new Button("EXIT");
         exit.setId("ExitFromGame");
-        exit.setPrefSize(402, 50);
-        exit.setStyle("-fx-text-fill: blue");
+        exit.setPrefSize(280, 50);
         exit.setOnAction((t) -> {
             app.exit();
         });
-        HBox hBox = new HBox(exit);
-        hBox.setLayoutX(43);
-        hBox.setLayoutY(735);
-        challengeComp.setId("main_button");
-        challengePlayer.setId("main_button");
-        exit.setId("main_button");
-/////////////////////////////////////////////////////////
-
+        
+        exit.setId("playerButton");
+        
+        HBox buttonBox = new HBox(20, challengeComp,exit);
+        buttonBox.setAlignment(Pos.CENTER_LEFT);
+        buttonBox.setLayoutX(80);
+        buttonBox.setLayoutY(450);
         gridPane = new GridPane();
         gridPane.setId("GridMain");
-        gridPane.setHgap(30);
-        gridPane.setPrefSize(516, 224.0);
-
+        gridPane.setHgap(10);
+        gridPane.setPrefSize(495.2, 250.0);
 
         //////////////////////////////////////////////////////////
         
+
+//        HBox hBox = new HBox(exit);
+//        hBox.setLayoutX(1100);
+//        hBox.setLayoutY(300);
         /////////////////////////////////////////////////////////////////
 
         ScrollPane scrollPane = new ScrollPane(gridPane);
@@ -118,70 +106,51 @@ public class MainScreen extends Pane {
 
         VBox v = new VBox();
         v.getChildren().add(scrollPane);
-        v.setLayoutX(338);
-        v.setLayoutY(305);
+        v.setLayoutX(800);
+        v.setLayoutY(80);
 
         playerName2 = new Label();
         playerName2.setLayoutX(200);
-        playerName2.setLayoutY(558);
-        playerName2.setId("welcome");
+        playerName2.setLayoutY(130);
 
         welcome = new Label();
         welcome.setId("welcome");
-        welcome.setLayoutX(43);
-        welcome.setLayoutY(558);
-
-        Label tictactoe = new Label("Tic Tac Toe");
-        tictactoe.setLayoutX(470);
-        tictactoe.setLayoutY(2);
-        tictactoe.setId("tictactoe");
-
-      
-//        Image image = new Image(getClass().getResourceAsStream("/images/Tic.png"));
-//        ImageView imageView = new ImageView();
-//        imageView.setImage(image);
-//        imageView.setLayoutX(446);
-//        imageView.setLayoutY(68);
-//        imageView.setFitWidth(306);
-//        imageView.setFitHeight(225);
-
+        welcome.setLayoutX(150);
+        welcome.setLayoutY(80);
 
         points2 = new Label();
-        points2.setLayoutX(200);
-        points2.setLayoutY(606);
-        points2.setId("welcome");
+        points2.setLayoutX(500);
+        points2.setLayoutY(130);
 
         points = new Label();
         points.setId("welcome");
-        points.setLayoutX(47);
-        points.setLayoutY(606);
+        points.setLayoutX(450);
+        points.setLayoutY(80);
 
         //String variable="WELCOME " + ;
         chatTextArea = new TextArea("");
         chatTextArea.setId("ta");
         chatTextArea.setEditable(false);
-        chatTextArea.setLayoutX(862);
-        chatTextArea.setLayoutY(550);
-        chatTextArea.setPrefSize(297, 180);
+        chatTextArea.setLayoutX(800);
+        chatTextArea.setLayoutY(420);
+        chatTextArea.setMaxWidth(350.0);
+        chatTextArea.setMaxHeight(250.0);
         chatTextArea.setWrapText(true);
 
         chatMessageArea = new TextArea("");
 
         chatMessageArea.setPromptText("Enter your Msg ");
-        chatMessageArea.setLayoutX(862);
-        chatMessageArea.setLayoutY(750);
-        chatMessageArea.setPrefWidth(225.0);
-        chatMessageArea.setPrefHeight(38.0);
-        chatMessageArea.setMaxWidth(225.0);
-        chatMessageArea.setMaxHeight(38.5);
+        chatMessageArea.setLayoutX(800);
+        chatMessageArea.setLayoutY(700);
+        chatMessageArea.setMaxWidth(280.0);
+        chatMessageArea.setMaxHeight(10.5);
         chatMessageArea.setWrapText(true);
 
         Button send = new Button();
-        send.setText("->");
+        send.setText("send");
         send.setId("sendChatMainScreen");
-        send.setLayoutX(1101);
-        send.setLayoutY(750);
-        send.setPrefSize(58, 38);
+        send.setLayoutX(1080);
+        send.setLayoutY(700);
 
         send.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -198,7 +167,7 @@ public class MainScreen extends Pane {
             }
         }
         );
-        getChildren().addAll(buttonBox, chatMessageArea, chatTextArea, send, v, hBox, welcome, points, playerName2, points2,tictactoe);//, imageView);
+        getChildren().addAll(buttonBox, chatMessageArea, chatTextArea, send, v, welcome, points, playerName2, points2);
         setId("MainScreenPane");
     }
 

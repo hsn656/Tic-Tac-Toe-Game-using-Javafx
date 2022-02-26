@@ -96,6 +96,7 @@ public class ServerMain extends Application {
         root.setId("stack");
         root.getChildren().addAll(hbox, scrollPane, textArea);
         Scene scene = new Scene(root, 1350, 700);
+        scene.getStylesheets().add(getClass().getResource("/css/style.css").toString());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -132,9 +133,9 @@ public class ServerMain extends Application {
             playerName.setId("playerName");
             Circle cir2 = new Circle(150.0f, 150.0f, 5.f);
             cir2.setFill(color);
-            gridPane.add(cir2, 0, playersListCounter);
-            gridPane.add(score2, 2, playersListCounter);
-            gridPane.add(playerName, 1, playersListCounter);
+            gridPane.add(cir2, 1, playersListCounter);
+            gridPane.add(score2, 3, playersListCounter);
+            gridPane.add(playerName, 2, playersListCounter);
             playersListCounter++;
 
         }

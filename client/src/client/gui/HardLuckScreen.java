@@ -40,23 +40,23 @@ public class HardLuckScreen extends StackPane {
         Button lose = new Button("Good Luck Next Time");
         lose.setId("lose");
         lose.setEffect(e);
-        ToggleButton playAgain = new ToggleButton("Play Again");
-        playAgain.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (App.inMultiplayerGame) {
-                    app.sendInvitation(App.opposingPlayerId);
-                } else {
-                    app.setScreen("levels");
-                }
-                App.inMultiplayerGame = false;
-                App.opposingPlayerId = -1;
-                App.opposingPlayerName = "";
-            }
-        });
-        playAgain.setPrefSize(180, 20);
-        playAgain.setId("playAgain");
-        HBox buttonBox = new HBox(50, playAgain);
+//        ToggleButton playAgain = new ToggleButton("Play Again");
+//        playAgain.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                if (App.inMultiplayerGame) {
+//                    app.sendInvitation(App.opposingPlayerId);
+//                } else {
+//                    app.setScreen("levels");
+//                }
+//                App.inMultiplayerGame = false;
+//                App.opposingPlayerId = -1;
+//                App.opposingPlayerName = "";
+//            }
+//        });
+//        playAgain.setPrefSize(180, 20);
+//        playAgain.setId("playAgain");
+//        HBox buttonBox = new HBox(50, playAgain);
 
         Button exit = new Button("EXIT");
         exit.setId("ExitFromGame");
@@ -78,7 +78,7 @@ public class HardLuckScreen extends StackPane {
 
         HBox hBox = new HBox(200, back, exit);
 
-        VBox vbox = new VBox(30, over, lose, buttonBox);
+        VBox vbox = new VBox(30, over, lose);
         vbox.setId("vbox");
 
         VBox v = new VBox(100, vbox, hBox);

@@ -41,23 +41,23 @@ public class NooneIsTheWinnerScreen extends StackPane {
         noOneWine.setId("lose");
         noOneWine.setEffect(e);
   
-        ToggleButton playAgain = new ToggleButton("Play Again");
-        playAgain.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (App.inMultiplayerGame) {
-                    app.sendInvitation(App.opposingPlayerId);
-                } else {
-                    app.setScreen("levels");
-                }
-                App.inMultiplayerGame = false;
-                App.opposingPlayerId = -1;
-                App.opposingPlayerName = "";
-            }
-        });
-        playAgain.setPrefSize(180, 20);
-        playAgain.setId("playAgain");
-        HBox buttonBox = new HBox(50, playAgain);
+//        ToggleButton playAgain = new ToggleButton("Play Again");
+//        playAgain.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                if (App.inMultiplayerGame) {
+//                    app.sendInvitation(App.opposingPlayerId);
+//                } else {
+//                    app.setScreen("levels");
+//                }
+//                App.inMultiplayerGame = false;
+//                App.opposingPlayerId = -1;
+//                App.opposingPlayerName = "";
+//            }
+//        });
+//        playAgain.setPrefSize(180, 20);
+//        playAgain.setId("playAgain");
+//        HBox buttonBox = new HBox(50, playAgain);
          
         /////////////////////////////////////////////////////
         Button exit = new Button("EXIT");
@@ -82,7 +82,7 @@ public class NooneIsTheWinnerScreen extends StackPane {
         
         
 /////////////////////////////////////////////////////
-        VBox vbox = new VBox(30, over, noOneWine, buttonBox);
+        VBox vbox = new VBox(30, over, noOneWine);
         vbox.setId("vbox");
 
          VBox v = new VBox(100, vbox,hBox);

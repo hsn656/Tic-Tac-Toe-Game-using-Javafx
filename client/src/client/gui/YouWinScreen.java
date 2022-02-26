@@ -44,26 +44,26 @@ public class YouWinScreen extends StackPane {
         lose.setId("lose");
         lose.setEffect(e);
 
-        ToggleButton playAgain = new ToggleButton("Play Again");
-        playAgain.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (App.inMultiplayerGame) {
-                    app.sendInvitation(App.opposingPlayerId);
-                } else {
-                    app.setScreen("levels");
-                }
-                App.inMultiplayerGame = false;
-                App.opposingPlayerId = -1;
-                App.opposingPlayerName = "";
-
-            }
-        });
-        playAgain.setPrefSize(180, 20);
-        playAgain.setId("playAgain");
-        HBox buttonBox = new HBox(50, playAgain);
+//        ToggleButton playAgain = new ToggleButton("Play Again");
+//        playAgain.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                if (App.inMultiplayerGame) {
+//                    app.sendInvitation(App.opposingPlayerId);
+//                } else {
+//                    app.setScreen("levels");
+//                }
+//                App.inMultiplayerGame = false;
+//                App.opposingPlayerId = -1;
+//                App.opposingPlayerName = "";
+//
+//            }
+//        });
+//        playAgain.setPrefSize(180, 20);
+//        playAgain.setId("playAgain");
+//        HBox buttonBox = new HBox(50, playAgain);
        
-        VBox vbox = new VBox(30, over, lose, buttonBox);
+        VBox vbox = new VBox(30, over, lose);
         vbox.setId("vbox");
           
         

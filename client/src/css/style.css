@@ -47,7 +47,7 @@
 
 #regionInvitationScreen
 {
-    -fx-background-image: url("/images/back.jfif");
+ /*    -fx-background-image: url("/images/back.jfif");*/
 
     -fx-background-repeat: no-repeat;   
     -fx-background-position: center center;
@@ -613,7 +613,7 @@ PasswordField
 }
 #stackInvitation
 {
-/*    -fx-background-image: url(/images/back.jpg);*/
+-fx-background-image: url(/images/back.jfif);
     -fx-background-repeat: stretch;   
     -fx-background-size: cover;
     -fx-background-position: center center;
@@ -972,11 +972,11 @@ TextField
 }
 
 #welcome{
-    -fx-text-fill:#FFD369;    
-        -fx-font-family: "Walter Turncoat";
+    -fx-text-fill:#FFFFFF;    
+    -fx-font-family: "Walter Turncoat";
     -fx-font-style: normal;
-    -fx-font-weight: normal;
-    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+    -fx-font-size: 35px;
     -fx-line-height: 38px;
   
 }
